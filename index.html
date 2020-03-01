@@ -109,7 +109,47 @@
       
 
       
-      <p><img src="/2020/03/01/Lampiao/image-20200301163528454.png" alt="image-20200301163528454"></p>
+      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p>老生常谈</p>
+<p><img src="/2020/03/01/Lampiao/image-20200301164232495.png" alt="image-20200301164232495"></p>
+<p><img src="/2020/03/01/Lampiao/image-20200301164422065.png" alt="image-20200301164422065"></p>
+<p>1898看一下喽 用的google插件 看到了cms是Drupal7,具体是什么小版本呢？接下来看</p>
+<p><img src="/2020/03/01/Lampiao/image-20200301164729523.png" alt="image-20200301164729523"></p>
+<p>常规思路 要扫描的 这里不展示了 看下防爬 有个日志文件 最后一次更新小版本54</p>
+<p>这个是RCE的 CVE编号CVE-2018-7600 poc构造附上 <a href="https://paper.seebug.org/567/" target="_blank" rel="noopener">https://paper.seebug.org/567/</a></p>
+<p><img src="/2020/03/01/Lampiao/image-20200301165005159.png" alt="image-20200301165005159"></p>
+<p><img src="/2020/03/01/Lampiao/image-20200301165045429.png" alt="image-20200301165045429"></p>
+<p>msf启动 search到了drupal 就你了四号种子选手</p>
+<p><img src="/2020/03/01/Lampiao/image-20200301165434860.png" alt="image-20200301165434860"></p>
+<h1 id="0x01-获取会话"><a href="#0x01-获取会话" class="headerlink" title="0x01 获取会话"></a><strong>0x01 获取会话</strong></h1><p><img src="/2020/03/01/Lampiao/image-20200301165628660.png" alt="image-20200301165628660"></p>
+<p>由于我们获取的shell并不是一个具有完整交互的shell，对于已经安装了python的系统，我们可以使用python提供的pty模块，只需要一行脚本就可以创建一个原生的终端，命令如下：<code>python -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</code></p>
+<p><img src="/2020/03/01/Lampiao/image-20200301165741613.png" alt="image-20200301165741613"></p>
+<h1 id="0x02-寻找突破"><a href="#0x02-寻找突破" class="headerlink" title="0x02 寻找突破"></a><strong>0x02 寻找突破</strong></h1><p>html路径下的四个文件 传回来查看</p>
+<ol>
+<li>qrc.png：一个二维码，扫出来的结果是 Try harger! muahuahuahua，被作者鼓励了。。</li>
+<li>audio.m4a：提示为user tiago，说明要先找到用户tiago的密码</li>
+<li>uizGonzaga-LampiaoFalou.mp3：一首音乐，丢入隐写工具没发现什么异常</li>
+<li>lampiao.jpg：一张牛仔的图片，丢入binwlak中未发现有什么隐写</li>
+</ol>
+<p>var/www/html/sites/default目录下找到配置文件settings.php，发现敏感信息，tiago以及密码，很有可能就是其系统用户tiago的密码</p>
+<p><img src="/2020/03/01/Lampiao/image-20200301170402837.png" alt="image-20200301170402837"></p>
+<h1 id="0x03-获取普通权限"><a href="#0x03-获取普通权限" class="headerlink" title="0x03 获取普通权限"></a><strong>0x03 获取普通权限</strong></h1><p>其实root加数据库密码也上去了 </p>
+<p><img src="/2020/03/01/Lampiao/image-20200301170722270.png" alt="image-20200301170722270"></p>
+<p><img src="/2020/03/01/Lampiao/image-20200301170854563.png" alt="image-20200301170854563"></p>
+<p>翻来覆去怎么也没折腾到主机root权限 看下内核吧 说不定能脏牛呢</p>
+<p><img src="/2020/03/01/Lampiao/image-20200301171113982.png" alt="image-20200301171113982"></p>
+<p>说啥来啥 哈哈 </p>
+<h1 id="0x03-dirty-cow提权"><a href="#0x03-dirty-cow提权" class="headerlink" title="0x03 dirty cow提权"></a><strong>0x03 dirty cow提权</strong></h1><p>exploit-db给了exp 🔗 <a href="https://www.exploit-db.com/exploits/40847" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/40847</a></p>
+<p>我用的msf里的</p>
+<p><img src="/2020/03/01/Lampiao/image-20200301173935106.png" alt="image-20200301173935106"></p>
+<p><img src="/2020/03/01/Lampiao/image-20200301173909301.png" alt="image-20200301173909301"></p>
+<p>python开个http 靶机wget下载</p>
+<p><img src="/2020/03/01/Lampiao/image-20200301174353272.png" alt="image-20200301174353272"></p>
+<p>编译一下 g++ -Wall -pedantic -O2 -std=c++11 -pthread -o 40847 40847.cpp -lutil</p>
+<p>./40847</p>
+<p>执行成功，root用户需要用dirtyCowFun密码登录服务器。</p>
+<p>ssh重新连接，用户为root，密码为dirtyCowFun</p>
+<p><img src="/2020/03/01/Lampiao/image-20200301174535764.png" alt="image-20200301174535764"></p>
+<h1 id="0x04-拿到flag"><a href="#0x04-拿到flag" class="headerlink" title="0x04 拿到flag"></a><strong>0x04 拿到flag</strong></h1><p><img src="/2020/03/01/Lampiao/image-20200301174904144.png" alt="image-20200301174904144"></p>
 
       
       <!-- reward -->
