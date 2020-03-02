@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-01T17:17:27.536Z</updated>
+  <updated>2020-03-02T07:19:44.997Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Raven2</title>
+    <link href="http://yoursite.com/2020/03/02/Raven2/"/>
+    <id>http://yoursite.com/2020/03/02/Raven2/</id>
+    <published>2020-03-02T05:46:43.000Z</published>
+    <updated>2020-03-02T07:19:44.997Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0x00-书接上回&quot;&gt;&lt;a href=&quot;#0x00-书接上回&quot; class=&quot;headerlink&quot; title=&quot;0x00 书接上回&quot;&gt;&lt;/a&gt;&lt;strong&gt;0x00 书接上回&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;Raven第二部其实就是Raven1的加固版
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Vulnhub" scheme="http://yoursite.com/tags/Vulnhub/"/>
+    
+  </entry>
   
   <entry>
     <title>Raven1</title>
