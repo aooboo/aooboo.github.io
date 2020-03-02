@@ -71,6 +71,110 @@
     
     
     
+    <article id="post-Tr0ll-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/03/02/Tr0ll-1/"
+    >Tr0ll: 1</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/02/Tr0ll-1/" class="article-date">
+  <time datetime="2020-03-02T11:40:44.000Z" itemprop="datePublished">2020-03-02</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p>这次又是双生 第一篇</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302200318055.png" alt="image-20200302200318055"></p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302200434911.png" alt="image-20200302200434911"></p>
+<p>80端口</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302200447964.png" alt="image-20200302200447964"></p>
+<p>dirb扫一下</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302200828953.png" alt="image-20200302200828953"></p>
+<p>查看下robots</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302200912404.png" alt="image-20200302200912404"></p>
+<p>访问下 哎我去 挑衅？看我一会儿拿下给你加密一下  80不行转战FTP</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302201028285.png" alt="image-20200302201028285"></p>
+<p>ftp拿下pcap文件 分析下 有个账号 另一个包还有个不知道是啥的 也许是目录</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302203253733.png" alt="image-20200302203253733"></p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302203348293.png" alt="image-20200302203348293"></p>
+<p>果然是个目录</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302203453329.png" alt="image-20200302203453329"></p>
+<p>下载 搜下字符</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302203744541.png" alt="image-20200302203744541"></p>
+<p>哎 心累 再去访问下 终于知道直男男朋友送套娃 女生心里是怎么想的了</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302203917895.png" alt="image-20200302203917895"></p>
+<p>第一个是账号</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302204142840.png" alt="image-20200302204142840"></p>
+<p>第二个是密码</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302204207188.png" alt="image-20200302204207188"></p>
+<p>密码固定 用户就hydra用来做字典跑一下 结果用户是overflow 还溢出…</p>
+<p>不行呢！头脑风暴一下 这个作者我是真服 good job是对我说的 那就是目录名字就是密码呗</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302204733348.png" alt="image-20200302204733348"></p>
+<h1 id="0x01-获取shell"><a href="#0x01-获取shell" class="headerlink" title="0x01 获取shell"></a><strong>0x01 获取shell</strong></h1><p><img src="/2020/03/02/Tr0ll-1/image-20200302204912179.png" alt="image-20200302204912179"></p>
+<p>….我还能说什么</p>
+<h1 id="0x02-内核提权"><a href="#0x02-内核提权" class="headerlink" title="0x02 内核提权"></a><strong>0x02 内核提权</strong></h1><p>根据内核 kali搜下exp</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302205724077.png" alt="image-20200302205724077"></p>
+<p>cp过来 python3开个http</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302210024549.png" alt="image-20200302210024549"></p>
+<p>wget落地 要去tmp /下不让写入</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302210247114.png" alt="image-20200302210247114"></p>
+<p>编译运行 提权成功</p>
+<p><img src="/2020/03/02/Tr0ll-1/image-20200302210414249.png" alt="image-20200302210414249"></p>
+<p>还有很多方法如计划任务反弹 大家可以自行试下 </p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Raven2" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
