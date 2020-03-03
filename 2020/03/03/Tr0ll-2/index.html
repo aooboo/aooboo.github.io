@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Tr0ll: 1 |  岛
+    Tr0ll: 2 |  岛
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -32,7 +32,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-Tr0ll-1" class="article article-type-post" itemscope
+  <article id="post-Tr0ll-2" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -40,7 +40,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Tr0ll: 1
+  Tr0ll: 2
 </h1>
   
 
@@ -49,8 +49,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/02/Tr0ll-1/" class="article-date">
-  <time datetime="2020-03-02T11:40:44.000Z" itemprop="datePublished">2020-03-02</time>
+      <a href="/2020/03/03/Tr0ll-2/" class="article-date">
+  <time datetime="2020-03-03T11:50:25.000Z" itemprop="datePublished">2020-03-03</time>
 </a>
       
       
@@ -60,7 +60,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">264字</span>
+            <span class="post-count">440字</span>
         </span>
     </span>
 
@@ -96,44 +96,44 @@
       
 
       
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p>这次又是双生 第一篇</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200318055.png" alt="image-20200302200318055"></p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200434911.png" alt="image-20200302200434911"></p>
-<p>80端口</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200447964.png" alt="image-20200302200447964"></p>
-<p>dirb扫一下</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200828953.png" alt="image-20200302200828953"></p>
-<p>查看下robots</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200912404.png" alt="image-20200302200912404"></p>
-<p>访问下 哎我去 挑衅？看我一会儿拿下给你加密一下  80不行转战FTP</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302201028285.png" alt="image-20200302201028285"></p>
-<p>ftp拿下pcap文件 分析下 有个账号 另一个包还有个不知道是啥的 也许是目录</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203253733.png" alt="image-20200302203253733"></p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203348293.png" alt="image-20200302203348293"></p>
-<p>果然是个目录</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203453329.png" alt="image-20200302203453329"></p>
-<p>下载 搜下字符</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203744541.png" alt="image-20200302203744541"></p>
-<p>哎 心累 再去访问下 终于知道直男男朋友送套娃 女生心里是怎么想的了</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203917895.png" alt="image-20200302203917895"></p>
-<p>第一个是账号</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302204142840.png" alt="image-20200302204142840"></p>
-<p>第二个是密码</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302204207188.png" alt="image-20200302204207188"></p>
-<p>密码固定 用户就hydra用来做字典跑一下 结果用户是overflow 还溢出…</p>
-<p>不行呢！头脑风暴一下 这个作者我是真服 good job是对我说的 那就是目录名字就是密码呗</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302204733348.png" alt="image-20200302204733348"></p>
-<h1 id="0x01-获取shell"><a href="#0x01-获取shell" class="headerlink" title="0x01 获取shell"></a><strong>0x01 获取shell</strong></h1><p><img src="/2020/03/02/Tr0ll-1/image-20200302204912179.png" alt="image-20200302204912179"></p>
-<p>….我还能说什么</p>
-<h1 id="0x02-内核提权"><a href="#0x02-内核提权" class="headerlink" title="0x02 内核提权"></a><strong>0x02 内核提权</strong></h1><p>根据内核 kali搜下exp</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302205724077.png" alt="image-20200302205724077"></p>
-<p>cp过来 python3开个http</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302210024549.png" alt="image-20200302210024549"></p>
-<p>wget落地 要去tmp /下不让写入</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302210247114.png" alt="image-20200302210247114"></p>
-<p>编译运行 提权成功</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302210414249.png" alt="image-20200302210414249"></p>
-<p>还有很多方法如计划任务反弹 大家可以自行试下 </p>
+      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p>双生姊妹第二篇</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303213215791.png" alt="image-20200303213215791"></p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303213349966.png" alt="image-20200303213349966"></p>
+<p>可以在上面看到Nmap找到开放了21、22、80端口</p>
+<p>看下80 查看源码发现了作者的名字 除此之外没什么 不过后面会用到的 留着</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303214727575.png" alt="image-20200303214727575"></p>
+<p>ftp进去 用户密码都是作者名</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303220321566.png" alt="image-20200303220321566"></p>
+<p>里面发现个l mao.zip下载下来解压发现有密码 先留着  robots.txt发现很多目录 可以保存下来 用dirb做字典扫一下 </p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303220724680.png" alt="image-20200303220724680"></p>
+<p>结果 </p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303220804705.png" alt="image-20200303220804705"></p>
+<p>这个路径我们可以深入搞一下 源码里还藏了个图片 </p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303220902152.png" alt="image-20200303220902152"></p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303220954440.png" alt="image-20200303220954440"></p>
+<p>拖片wget下来 tail标准输出下 好像在打ctf….</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303221204273.png" alt="image-20200303221204273"></p>
+<p>照着他的话做喽 访问下路径 发现密码本 都是base64 解一下拿去爆之前那个zip</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303221324637.png" alt="image-20200303221324637"></p>
+<p>使用fcrackzip工具（专门用来破解zip密码）<br>PASSWORD FOUND!!!: pw == ItCantReallyBeThisEasyRightLOL</p>
+<p>解出来的 cat一下发现是ssh密钥 试了一下</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303221853545.png" alt="image-20200303221853545"></p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303222203450.png" alt="image-20200303222203450"></p>
+<p>这里的意思是，链接失效了，可以登录需要外壳拿权限</p>
+<p>方法在这里 <a href="https://unix.stackexchange.com/questions/157477/how-can-shellshock-be-exploited-over-ssh" target="_blank" rel="noopener">https://unix.stackexchange.com/questions/157477/how-can-shellshock-be-exploited-over-ssh</a></p>
+<h1 id="0x01-获取shell"><a href="#0x01-获取shell" class="headerlink" title="0x01 获取shell"></a><strong>0x01 获取shell</strong></h1><p>命令 ：ssh <a href="mailto:noob@192.168.0.104">noob@192.168.0.104</a> -i noob -t “() { :;}; /bin/bash”</p>
+<p>多试试 看我多惨…</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303223053104.png" alt="image-20200303223053104"></p>
+<p>我们使用exploit进行命令注入攻击拿到反弹shell在本地上</p>
+<p>如图搞就行</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303223538369.png" alt="image-20200303223538369"></p>
+<p>使用python -c ‘import pty; pty.spawn(“/bin/bash”)’进入noob用户</p>
+<p>然后命令：find / -perm -4000 2&gt;/dev/null<br>使用find查看底层目录</p>
+<p><img src="/2020/03/03/Tr0ll-2/image-20200303223952517.png" alt="image-20200303223952517"></p>
+<p>缓冲区溢出….</p>
+<p>命令：gdb -q r00t（加载执行r00t程序发生溢出时来跟踪EIP的值）<br>命令：set disassembly-flavor intel（转换为intel格式的汇编）<br>命令：disas main（显示main函数对应的汇编代码）</p>
+<p>三个门 不同的三个功能 我们是需要最大的文件也就是返回用户输出功能的</p>
+<p>明天再搞 </p>
 
       
       <!-- reward -->
@@ -203,13 +203,15 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/02/Tr0ll-1/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/03/Tr0ll-2/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vulnhub/" rel="tag">Vulnhub</a></li></ul>
+
 
     </footer>
 
@@ -219,19 +221,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/03/03/Tr0ll-2/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Tr0ll: 2
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/03/02/Raven2/" class="article-nav-link">
+      <a href="/2020/03/02/Tr0ll-1/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Raven2</div>
+        <div class="article-nav-title">Tr0ll: 1</div>
       </a>
     
   </nav>
