@@ -71,6 +71,95 @@
     
     
     
+    <article id="post-W1R3S" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/03/05/W1R3S/"
+    >W1R3S</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/05/W1R3S/" class="article-date">
+  <time datetime="2020-03-05T11:43:40.000Z" itemprop="datePublished">2020-03-05</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/05/W1R3S/image-20200305194543215.png" alt="image-20200305194543215"></p>
+<p><img src="/2020/03/05/W1R3S/image-20200305194857422.png" alt="image-20200305194857422"></p>
+<p>四个端口 80开始</p>
+<p>apache的页面 那就扫一下喽 gobuster</p>
+<p><img src="/2020/03/05/W1R3S/image-20200305194943070.png" alt="image-20200305194943070"></p>
+<p><img src="/2020/03/05/W1R3S/image-20200305195911173.png" alt="image-20200305195911173"></p>
+<p>/wordpress和/administrator突破点</p>
+<p>访问了wordpress，也是没什么东西。</p>
+<p>于是访问/administrator，发现cms是cuppa 既然cms都给了 那作者肯定是想要漏洞利用了 kali搜下</p>
+<p><img src="/2020/03/05/W1R3S/image-20200305200011816.png" alt="image-20200305200011816"></p>
+<p><img src="/2020/03/05/W1R3S/image-20200305200112394.png" alt="image-20200305200112394"></p>
+<p>根据文件提示发现有lfi漏洞，根据提示构造url</p>
+<p>curl -s –data-urlencode urlConfig=../../../../../../../../../etc/passwd <a href="http://192.168.0.102/administrator/alerts/alertConfigField.php" target="_blank" rel="noopener">http://192.168.0.102/administrator/alerts/alertConfigField.php</a> </p>
+<p>再换成shadow试试</p>
+<p><img src="/2020/03/05/W1R3S/image-20200305200412146.png" alt="image-20200305200412146"></p>
+<p>john破一下</p>
+<p><img src="/2020/03/05/W1R3S/image-20200305200716703.png" alt="image-20200305200716703"> </p>
+<p>w1r3s用户computer ssh上去</p>
+<h1 id="0x01-成功登陆"><a href="#0x01-成功登陆" class="headerlink" title="0x01 成功登陆"></a><strong>0x01 成功登陆</strong></h1><p><img src="/2020/03/05/W1R3S/image-20200305202128901.png" alt="image-20200305202128901"></p>
+<h1 id="0x02-提权"><a href="#0x02-提权" class="headerlink" title="0x02 提权"></a><strong>0x02 提权</strong></h1><p>这我就笑了 密码一样的 sudo -l</p>
+<p><img src="/2020/03/05/W1R3S/image-20200305202345800.png" alt="image-20200305202345800"></p>
+<p>这个靶机比较简单 因为准备oscp考试 大佬给的目标34台 按顺序做 </p>
+<p>吃外卖去了 北京吃不完的外卖….</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Tr0ll-2" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
