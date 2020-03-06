@@ -71,6 +71,118 @@
     
     
     
+    <article id="post-DerpnStink" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/03/06/DerpnStink/"
+    >DerpnStink</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/06/DerpnStink/" class="article-date">
+  <time datetime="2020-03-06T13:47:14.000Z" itemprop="datePublished">2020-03-06</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/06/DerpnStink/image-20200306214933101.png" alt="image-20200306214933101"></p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306215044988.png" alt="image-20200306215044988"></p>
+<h1 id="0x01-flag1"><a href="#0x01-flag1" class="headerlink" title="0x01 flag1"></a><strong>0x01 flag1</strong></h1><p>80端口网页源代码112行</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306215212457.png" alt="image-20200306215212457"></p>
+<h1 id="0x02-获取shell"><a href="#0x02-获取shell" class="headerlink" title="0x02 获取shell"></a><strong>0x02 获取shell</strong></h1><p>dirb爆破一下 发现weblog路径</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306215516647.png" alt="image-20200306215516647"></p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306215733208.png" alt="image-20200306215733208"></p>
+<p>不行 看下之前的源码</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306215758832.png" alt="image-20200306215758832"></p>
+<p>添加本地hosts 根据提示</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306215812440.png" alt="image-20200306215812440"></p>
+<p>访问后发现是个wordpress 后台常规路径是wp-admin  弱密码admin admin</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306220237585.png" alt="image-20200306220237585"></p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306220348156.png" alt="image-20200306220348156"></p>
+<p>admin都进去了 那就上msf吧</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306220953586.png" alt="image-20200306220953586"></p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306221116509.png" alt="image-20200306221116509"></p>
+<p>拿到shell</p>
+<h1 id="0x03-flag2"><a href="#0x03-flag2" class="headerlink" title="0x03 flag2"></a><strong>0x03 flag2</strong></h1><p>cat /var/www/html/weblog/wp-config.php</p>
+<p>数据库的账号密码拿到</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306221339387.png" alt="image-20200306221339387"></p>
+<p>其实是有phpmyadmin目录的 第一次爆的时候我为了速度就中断了 我们访问下</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306221712863.png" alt="image-20200306221712863"></p>
+<p>有个hash </p>
+<p>john爆破暴破出的用户名/密码：unclestinky/wedgie57 </p>
+<p>登录 wordpress flag2到手</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306222011578.png" alt="image-20200306222011578"></p>
+<h1 id="0x04-flag3"><a href="#0x04-flag3" class="headerlink" title="0x04 flag3"></a><strong>0x04 flag3</strong></h1><p>如图 基操（用新用户）</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306222352388.png" alt="image-20200306222352388"></p>
+<h1 id="0x05-flag4"><a href="#0x05-flag4" class="headerlink" title="0x05 flag4"></a><strong>0x05 flag4</strong></h1><p>使用 ftp 登录系统 stinky/wedgie57，下载pcap包</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306222737324.png" alt="image-20200306222737324"></p>
+<p>发现ftp根目录是files 用shell移过去 pcap在desktop的同级目录documents下</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306223312113.png" alt="image-20200306223312113"></p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306223453873.png" alt="image-20200306223453873"></p>
+<p>那就分析下吧</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306225549075.png" alt="image-20200306225549075"></p>
+<p>另一个账号的用户名和密码为： mrderp / derpderpderpderpderpderpderp</p>
+<p>ssh上去 枚举系统发现提示信息</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306225938339.png" alt="image-20200306225938339"></p>
+<p>sudo一下</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306230341042.png" alt="image-20200306230341042"></p>
+<p>以上信息 /home/mrderp/binaries/derpy* 中：binaries 目录中的以 derpy 开头的可执行文件具有root权限。创建文件以提权</p>
+<p>ok看到了黎明前的曙光</p>
+<h1 id="0x06-提权-拿到flag4"><a href="#0x06-提权-拿到flag4" class="headerlink" title="0x06 提权 拿到flag4"></a><strong>0x06 提权 拿到flag4</strong></h1><p>/home/mrderp/下创建binaries目录 再创建derpy.sh 把/bin/bash echo进去 如图</p>
+<p><img src="/2020/03/06/DerpnStink/image-20200306231054176.png" alt="image-20200306231054176"></p>
+<p>ok 下一篇见</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-W1R3S" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
