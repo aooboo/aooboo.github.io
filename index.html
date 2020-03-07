@@ -71,6 +71,149 @@
     
     
     
+    <article id="post-Kioptrix全集" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/"
+    >Kioptrix全集</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/" class="article-date">
+  <time datetime="2020-03-07T08:11:41.000Z" itemprop="datePublished">2020-03-07</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="0x00-Kioptrix-Level-1"><a href="#0x00-Kioptrix-Level-1" class="headerlink" title="0x00 Kioptrix_Level_1"></a><strong>0x00 Kioptrix_Level_1</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307161830148.png" alt="image-20200307161830148"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307162355257.png" alt="image-20200307162355257"></p>
+<p>利用Samba溢出</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307165821506.png" alt="image-20200307165821506"></p>
+<p>还可以利用Apache OpenSSL漏洞溢出，不展示了。</p>
+<h1 id="0x01-Kioptrix-Level-1-1"><a href="#0x01-Kioptrix-Level-1-1" class="headerlink" title="0x01 Kioptrix_Level_1.1"></a><strong>0x01 Kioptrix_Level_1.1</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307170524511.png" alt="image-20200307170524511"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307170918034.png" alt="image-20200307170918034"></p>
+<p>80的index.php web基础考试来了 想起了考pte的时候</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171747660.png" alt="image-20200307171747660"></p>
+<p>命令执行</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171841255.png" alt="image-20200307171841255"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171849863.png" alt="image-20200307171849863"></p>
+<p>那不客气了 bash弹shell 注意；因为前面的是ping</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172121951.png" alt="image-20200307172121951"></p>
+<p>nc接到</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172251783.png" alt="image-20200307172251783"></p>
+<p>提权 看下版本</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172603208.png" alt="image-20200307172603208"></p>
+<p>这里我们用到了exploitdb的 <a href="https://www.exploit-db.com/download/9542" target="_blank" rel="noopener">https://www.exploit-db.com/download/9542</a></p>
+<p>python3 -m http.server 9999 开个http</p>
+<p>编译命令gcc -o 9542 9542.c</p>
+<p>记得在tmp因为有执行权限这目录 源文件下载下来后缀改成.c编译完就是9542了</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307173559780.png" alt="image-20200307173559780"></p>
+<p>闯关成功！</p>
+<h1 id="0x02-Kioptrix-Level-1-2"><a href="#0x02-Kioptrix-Level-1-2" class="headerlink" title="0x02 Kioptrix_Level_1.2"></a><strong>0x02 Kioptrix_Level_1.2</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307174435555.png" alt="image-20200307174435555"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307175301323.png" alt="image-20200307175301323"></p>
+<p>利用方式很多</p>
+<ul>
+<li>Gallarific<ul>
+<li>gallery.php SQL Injection</li>
+</ul>
+</li>
+<li>LotusCMS<ul>
+<li>RCE</li>
+<li>Code Inject</li>
+</ul>
+</li>
+</ul>
+<p>dirb开始 扫出挺多</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307180238145.png" alt="image-20200307180238145"></p>
+<p>做下host</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181159138.png" alt="image-20200307181159138"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181450474.png" alt="image-20200307181450474"></p>
+<p>msf我们用太多了 oscp考试限制msf使用的 那么这次我们从SQL Injection入手</p>
+<p>在exploit-db上搜索Gallarific的漏洞</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181638504.png" alt="image-20200307181638504"></p>
+<p>注入点：<a href="http://www.site.com/gallery.php?id=null" target="_blank" rel="noopener">www.site.com/gallery.php?id=null</a></p>
+<p>sqlmap跑这个 <a href="http://192.168.0.106/gallery/gallery.php?id=1" target="_blank" rel="noopener">http://192.168.0.106/gallery/gallery.php?id=1</a></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181924830.png" alt="image-20200307181924830"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183256152.png" alt="image-20200307183256152"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183221579.png" alt="image-20200307183221579"></p>
+<p>很久没升级sqlmap了….</p>
+<p>md5解完就是Mast3r和starwars</p>
+<p>loneferret / starwars 22走一波 </p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183819289.png" alt="image-20200307183819289"></p>
+<p>根据提示 sudo ht</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185119942.png" alt="image-20200307185119942"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307184036261.png" alt="image-20200307184036261"></p>
+<p>按F3 打开一个文件 /etc/passwd(或者/etc/sudoers) 编辑loneferrt那一行把1000和100 分别改为0，CTRL+W 保存，如图：</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185258898.png" alt="image-20200307185258898"></p>
+<p>提权成功</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185504768.png" alt="image-20200307185504768"></p>
+<h1 id="0x03-Kioptrix-Level-1-3"><a href="#0x03-Kioptrix-Level-1-3" class="headerlink" title="0x03 Kioptrix_Level_1.3"></a><strong>0x03 Kioptrix_Level_1.3</strong></h1><p>这个包下载下来是个vmdk</p>
+<p>需要我们把上一个刚打完的虚拟机硬盘移除倒入这个</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307191650536.png" alt="image-20200307191650536"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307191852194.png" alt="image-20200307191852194"></p>
+<p>看看80 先使用nmap通过NetBIOS枚举用户名</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307230439585.png" alt="image-20200307230439585"></p>
+<p>扫出来的账户加万能密码尝试登陆</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231412153.png" alt="image-20200307231412153"></p>
+<p>操作如下</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231835651.png" alt="image-20200307231835651"></p>
+<p>数据库账号拿到</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231942745.png" alt="image-20200307231942745"></p>
+<p>用<strong>sys_exec</strong>运行usermod命令来授予john管理员权限！</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307232351752.png" alt="image-20200307232351752"></p>
+<p>Root 😘</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-DerpnStink" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
