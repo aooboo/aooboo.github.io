@@ -187,7 +187,37 @@
 <p>用<strong>sys_exec</strong>运行usermod命令来授予john管理员权限！</p>
 <p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307232351752.png" alt="image-20200307232351752"></p>
 <p>Root 😘</p>
-
+<h1 id="0x04-Kioptrix-2014"><a href="#0x04-Kioptrix-2014" class="headerlink" title="0x04 Kioptrix 2014"></a><strong>0x04 Kioptrix 2014</strong></h1><p>信息收集</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230108891.png" alt="image-20200308230108891"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230743780.png" alt="image-20200308230743780"></p>
+<p>仅有80和8080端口开着，用的还是Apache 2.2.21服务的</p>
+<p>看来这把是考纯web啊 </p>
+<p>80啥也没有 8080有限制，什么时候都要看下robots和源码 发现了隐藏路径</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230928179.png" alt="image-20200308230928179"></p>
+<p>pChart后台</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231027189.png" alt="image-20200308231027189"></p>
+<p>kali搜下漏洞 看下exp了解到是本地文件包含 那就包吧</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231214272.png" alt="image-20200308231214272"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231309781.png" alt="image-20200308231309781"></p>
+<p>利用方式</p>
+<p>hxxp://localhost/examples/index.php？Action=View&amp;Script=%2f..%2f..%2fetc/passwd</p>
+<p>成了</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231522658.png" alt="image-20200308231522658"></p>
+<p>同理再看下apache配置 为啥8080 ban我 </p>
+<p>哦😯 火狐4.0的UA就可以了 我这用的是google的插件</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231744308.png" alt="image-20200308231744308"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232050054.png" alt="image-20200308232050054"></p>
+<p>phptax远程代码执行漏洞</p>
+<p>msf干净利索</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232653182.png" alt="image-20200308232653182"></p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232732265.png" alt="image-20200308232732265"></p>
+<p>差个提权 用的FreeBSD 9.0</p>
+<p>kali再搜一下 nc传文件</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308235321104.png" alt="image-20200308235321104"></p>
+<p>如下操作提权成功</p>
+<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308235715954.png" alt="image-20200308235715954"></p>
+<p>至此Kioptrix剧中😘</p>
+<h2 id><a href="#" class="headerlink" title></a></h2>
       
       <!-- reward -->
       
