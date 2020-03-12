@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-08T15:59:07.455Z</updated>
+  <updated>2020-03-12T15:31:59.044Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Pwnlab_init</title>
+    <link href="http://yoursite.com/2020/03/12/Pwnlab-init/"/>
+    <id>http://yoursite.com/2020/03/12/Pwnlab-init/</id>
+    <published>2020-03-12T14:22:07.000Z</published>
+    <updated>2020-03-12T15:31:59.044Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;0x00 信息收集&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2020/03/12/Pwnlab-init/image-20200312222253552.png&quot; alt=&quot;image-20200312222253552&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Kioptrix全集</title>
