@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-12T15:47:58.941Z</updated>
+  <updated>2020-03-14T06:45:28.783Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2020/03/12/Pwnlab-init/"/>
     <id>http://yoursite.com/2020/03/12/Pwnlab-init/</id>
     <published>2020-03-12T14:22:07.000Z</published>
-    <updated>2020-03-12T15:47:58.941Z</updated>
+    <updated>2020-03-14T06:45:28.783Z</updated>
     
     <summary type="html">
     
@@ -36,6 +36,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
+    
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -44,7 +48,7 @@
     <link href="http://yoursite.com/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/"/>
     <id>http://yoursite.com/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/</id>
     <published>2020-03-07T08:11:41.000Z</published>
-    <updated>2020-03-08T15:59:07.455Z</updated>
+    <updated>2020-03-14T06:44:53.325Z</updated>
     
     <summary type="html">
     
@@ -59,6 +63,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
+    
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -67,7 +75,7 @@
     <link href="http://yoursite.com/2020/03/06/DerpnStink/"/>
     <id>http://yoursite.com/2020/03/06/DerpnStink/</id>
     <published>2020-03-06T13:47:14.000Z</published>
-    <updated>2020-03-06T15:11:35.323Z</updated>
+    <updated>2020-03-14T06:42:54.551Z</updated>
     
     <summary type="html">
     
@@ -82,6 +90,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
+    
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -90,7 +102,7 @@
     <link href="http://yoursite.com/2020/03/05/W1R3S/"/>
     <id>http://yoursite.com/2020/03/05/W1R3S/</id>
     <published>2020-03-05T11:43:40.000Z</published>
-    <updated>2020-03-05T12:25:18.161Z</updated>
+    <updated>2020-03-14T06:46:27.436Z</updated>
     
     <summary type="html">
     
@@ -105,6 +117,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
+    
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -113,7 +129,7 @@
     <link href="http://yoursite.com/2020/03/03/Tr0ll-2/"/>
     <id>http://yoursite.com/2020/03/03/Tr0ll-2/</id>
     <published>2020-03-03T11:50:25.000Z</published>
-    <updated>2020-03-03T15:58:58.983Z</updated>
+    <updated>2020-03-14T06:46:14.185Z</updated>
     
     <summary type="html">
     
@@ -129,8 +145,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
     
-      <category term="Vulnhub" scheme="http://yoursite.com/tags/Vulnhub/"/>
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -139,7 +157,7 @@
     <link href="http://yoursite.com/2020/03/02/Tr0ll-1/"/>
     <id>http://yoursite.com/2020/03/02/Tr0ll-1/</id>
     <published>2020-03-02T11:40:44.000Z</published>
-    <updated>2020-03-02T13:05:01.576Z</updated>
+    <updated>2020-03-14T06:46:04.949Z</updated>
     
     <summary type="html">
     
@@ -155,6 +173,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
+    
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -163,7 +185,7 @@
     <link href="http://yoursite.com/2020/03/02/Raven2/"/>
     <id>http://yoursite.com/2020/03/02/Raven2/</id>
     <published>2020-03-02T05:46:43.000Z</published>
-    <updated>2020-03-02T07:19:44.997Z</updated>
+    <updated>2020-03-14T06:45:53.845Z</updated>
     
     <summary type="html">
     
@@ -178,8 +200,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
     
-      <category term="Vulnhub" scheme="http://yoursite.com/tags/Vulnhub/"/>
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -188,7 +212,7 @@
     <link href="http://yoursite.com/2020/03/01/Raven1/"/>
     <id>http://yoursite.com/2020/03/01/Raven1/</id>
     <published>2020-03-01T15:39:19.000Z</published>
-    <updated>2020-03-01T17:17:27.536Z</updated>
+    <updated>2020-03-14T06:45:42.719Z</updated>
     
     <summary type="html">
     
@@ -203,8 +227,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
     
-      <category term="Security" scheme="http://yoursite.com/tags/Security/"/>
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -213,7 +239,7 @@
     <link href="http://yoursite.com/2020/03/01/Lampiao/"/>
     <id>http://yoursite.com/2020/03/01/Lampiao/</id>
     <published>2020-03-01T08:21:02.000Z</published>
-    <updated>2020-03-01T14:04:56.082Z</updated>
+    <updated>2020-03-14T06:45:15.387Z</updated>
     
     <summary type="html">
     
@@ -229,6 +255,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
+    
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
@@ -237,7 +267,7 @@
     <link href="http://yoursite.com/2020/02/29/GoldenEye/"/>
     <id>http://yoursite.com/2020/02/29/GoldenEye/</id>
     <published>2020-02-29T13:28:47.000Z</published>
-    <updated>2020-02-29T16:46:26.569Z</updated>
+    <updated>2020-03-14T06:44:05.518Z</updated>
     
     <summary type="html">
     
@@ -252,6 +282,10 @@
     </summary>
     
     
+      <category term="靶机" scheme="http://yoursite.com/categories/%E9%9D%B6%E6%9C%BA/"/>
+    
+    
+      <category term="Vulnhub 靶机" scheme="http://yoursite.com/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/"/>
     
   </entry>
   
