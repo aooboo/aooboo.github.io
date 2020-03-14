@@ -639,11 +639,8 @@ if(isset($_POST['submit'])) {
   <entry>
     <title>About me</title>
     <url>/2020/02/28/About%20me/</url>
-    <content><![CDATA[<p>|  A Hacker，live in Beijing，China.</p>
-<p>姓名：loki</p>
-<p>现居：北京</p>
-<p>Github：aooboo</p>
-<p>微信：IFBBPROkyle</p>
+    <content><![CDATA[<p>|     A Hacker，live in Beijing，China.</p>
+<p>姓名：loki<br>现居：北京<br>Github：aooboo<br>微信：IFBBPROkyle</p>
 <p><img src="/2020/02/28/About%20me/WechatIMG6.jpeg" alt="image-20200314161936240"></p>
 ]]></content>
   </entry>
