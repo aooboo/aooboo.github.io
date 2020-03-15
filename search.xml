@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SickOs1.1</title>
+    <url>/2020/03/15/SickOs1-1/</url>
+    <content><![CDATA[<h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/15/SickOs1-1/image-20200315143529889.png" alt="image-20200315143529889"></p>
+<p>3128有代理  nikto扫一下</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315145113192.png" alt="image-20200315145113192"></p>
+<p>用nikto扫描出很多信息…透露了/cgi-bin/status位置（容易受到shellshock攻击），这边还存在robots.txt ，访问下robots挂上代理，我用的谷歌插件</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315145554846.png" alt="image-20200315145554846"></p>
+<p>访问下80 根据提示在访问下wolfcms</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315145611556.png" alt="image-20200315145611556"></p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315145646346.png" alt="image-20200315145646346"></p>
+<p>网上搜到这个cms的登陆界面是<a href="http://192.168.0.103/wolfcms/?/admin/login" target="_blank" rel="noopener">http://192.168.0.103/wolfcms/?/admin/login</a></p>
+<p>admin admin弱口令进去</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315150009521.png" alt="image-20200315150009521"></p>
+<p>我们看到了这里有上传页面 接下来就是做个马上传提权，大概就是这样了</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315150043417.png" alt="image-20200315150043417"></p>
+<h1 id="0x01-文件上传"><a href="#0x01-文件上传" class="headerlink" title="0x01 文件上传"></a><strong>0x01 文件上传</strong></h1><p><img src="/2020/03/15/SickOs1-1/image-20200315150534277.png" alt="image-20200315150534277"></p>
+<p>msf接 python获取tty 我们现在受伤已经有www权限了 那么就是提权了接下来<br><img src="/2020/03/15/SickOs1-1/image-20200315152344144.png" alt="image-20200315152344144"></p>
+<h1 id="0x02-提权"><a href="#0x02-提权" class="headerlink" title="0x02 提权"></a><strong>0x02 提权</strong></h1><p>了解下站点结构 找到config.php寻找密码</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315152649835.png" alt="image-20200315152649835"></p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315152718022.png" alt="image-20200315152718022"></p>
+<p>直接root不行 了解到passwd文件里的提示 sickos是第一用户 直接su过去</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315152900190.png" alt="image-20200315152900190"></p>
+<p>权限还是不对 再sudo -i 可以了 </p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315153249332.png" alt="image-20200315153249332"></p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315153348379.png" alt="image-20200315153348379"></p>
+<p>第一关通过！</p>
+]]></content>
+      <categories>
+        <category>靶机</category>
+      </categories>
+      <tags>
+        <tag>Vulnhub 靶机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IMF</title>
     <url>/2020/03/14/IMF/</url>
     <content><![CDATA[<h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/14/IMF/image-20200314185633352.png" alt="image-20200314185633352"></p>

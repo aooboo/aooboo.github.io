@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    categories |  岛
+    SickOs1.1 |  岛
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -32,21 +32,255 @@
   <div id="app">
     <main class="content">
       <section class="outer">
+  <article id="post-SickOs1-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  SickOs1.1
+</h1>
   
-    <h1 class="page-type-title">Categories</h1>
-    <!-- <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%B6%E6%9C%BA/">靶机</a></li></ul> -->
-    <ul class="category-list">
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/15/SickOs1-1/" class="article-date">
+  <time datetime="2020-03-15T06:32:28.000Z" itemprop="datePublished">2020-03-15</time>
+</a>
       
-         
-          <a class="category-list-link" href="/categories/靶机/" title="靶机">
-            <li class="category-list-item">
-            靶机<i>12</i>
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%B6%E6%9C%BA/">靶机</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">224字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/15/SickOs1-1/image-20200315143529889.png" alt="image-20200315143529889"></p>
+<p>3128有代理  nikto扫一下</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315145113192.png" alt="image-20200315145113192"></p>
+<p>用nikto扫描出很多信息…透露了/cgi-bin/status位置（容易受到shellshock攻击），这边还存在robots.txt ，访问下robots挂上代理，我用的谷歌插件</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315145554846.png" alt="image-20200315145554846"></p>
+<p>访问下80 根据提示在访问下wolfcms</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315145611556.png" alt="image-20200315145611556"></p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315145646346.png" alt="image-20200315145646346"></p>
+<p>网上搜到这个cms的登陆界面是<a href="http://192.168.0.103/wolfcms/?/admin/login" target="_blank" rel="noopener">http://192.168.0.103/wolfcms/?/admin/login</a></p>
+<p>admin admin弱口令进去</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315150009521.png" alt="image-20200315150009521"></p>
+<p>我们看到了这里有上传页面 接下来就是做个马上传提权，大概就是这样了</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315150043417.png" alt="image-20200315150043417"></p>
+<h1 id="0x01-文件上传"><a href="#0x01-文件上传" class="headerlink" title="0x01 文件上传"></a><strong>0x01 文件上传</strong></h1><p><img src="/2020/03/15/SickOs1-1/image-20200315150534277.png" alt="image-20200315150534277"></p>
+<p>msf接 python获取tty 我们现在受伤已经有www权限了 那么就是提权了接下来<br><img src="/2020/03/15/SickOs1-1/image-20200315152344144.png" alt="image-20200315152344144"></p>
+<h1 id="0x02-提权"><a href="#0x02-提权" class="headerlink" title="0x02 提权"></a><strong>0x02 提权</strong></h1><p>了解下站点结构 找到config.php寻找密码</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315152649835.png" alt="image-20200315152649835"></p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315152718022.png" alt="image-20200315152718022"></p>
+<p>直接root不行 了解到passwd文件里的提示 sickos是第一用户 直接su过去</p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315152900190.png" alt="image-20200315152900190"></p>
+<p>权限还是不对 再sudo -i 可以了 </p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315153249332.png" alt="image-20200315153249332"></p>
+<p><img src="/2020/03/15/SickOs1-1/image-20200315153348379.png" alt="image-20200315153348379"></p>
+<p>第一关通过！</p>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong s>
+              本博客所有文章除特别声明外，均采用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 许可协议。转载请注明出处！
             </li>
-          </a>
+          </ul>
+        </div>
         
+    <footer class="article-footer">
       
-      </ul>
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/15/SickOs1-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vulnhub-%E9%9D%B6%E6%9C%BA/" rel="tag">Vulnhub 靶机</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
   
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/03/14/IMF/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">IMF</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
 </section>
       <footer class="footer">
   <div class="outer">
@@ -213,6 +447,30 @@
 </script>
 
 
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
 
 
 <script>
