@@ -64,7 +64,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">370字</span>
+            <span class="post-count">373字</span>
         </span>
     </span>
 
@@ -102,14 +102,14 @@
       
       <p>以DoraBox漏洞练习平台来进行本文的实验</p>
 <p>项目地址：<a href="https://github.com/gh0stkey/DoraBox" target="_blank" rel="noopener">https://github.com/gh0stkey/DoraBox</a></p>
-<h1 id="XSS反射型"><a href="#XSS反射型" class="headerlink" title="XSS反射型"></a><strong>XSS反射型</strong></h1><p>xss反射型，输入的代码经过服务器端处理后返回页面，造成代码执行。<br><code>&lt;script&gt;alert(/reflect_xss/)&lt;/script&gt;</code></p>
+<h1 id="0x00-XSS反射型"><a href="#0x00-XSS反射型" class="headerlink" title="0x00 XSS反射型"></a><strong>0x00 XSS反射型</strong></h1><p>xss反射型，输入的代码经过服务器端处理后返回页面，造成代码执行。<br><code>&lt;script&gt;alert(/reflect_xss/)&lt;/script&gt;</code></p>
 <p><img src="/2020/03/17/XSS%E8%B7%A8%E7%AB%99/image-20200317165346892.png" alt="image-20200317165346892"></p>
 <p>这时候我们注意到页面先是返回了string(37) “ 然后执行了注入代码。<br>那么为什么会返回这个呢，我们看下源码<br>DoraBox\xxs\reflect_xss.php</p>
 <p><img src="/2020/03/17/XSS%E8%B7%A8%E7%AB%99/image-20200317165710937.png" alt="image-20200317165710937"></p>
 <p><code>$p 创建了一个对象Func，方法是GET，参数是name，$p -&gt; con_html生成表单，也就是我们一开始看到的页面。</code><br><code>关键的是echo $p -&gt; con_function(&#39;var_dump&#39;,$name);，这里con_function是作者造的回调函数，作用是执行作者传参进去的内容，当相应的函数执行。</code><br><code>那么con_function(&#39;var_dump&#39;,$name) 的作用等价于var_dump($name)，var_dump在处理字符串的时候会以如下形式string(字符串长度) &quot;字符串内容&quot;。</code></p>
-<h1 id="XSS-存储型"><a href="#XSS-存储型" class="headerlink" title="XSS 存储型"></a><strong>XSS 存储型</strong></h1><p>存储型xss作者设计的很有意思，采用直接向当前页面追加内容的方式实现的，也就是说，如果你测试很多次的话，这个页面会越来越大。<br>所以在name<code>输入框提交&lt;script&gt;alert(/reflect_xss/)&lt;/script&gt;</code>，再次刷新页面即可触发注入代码。</p>
+<h1 id="0x01-XSS-存储型"><a href="#0x01-XSS-存储型" class="headerlink" title="0x01 XSS 存储型"></a><strong>0x01 XSS 存储型</strong></h1><p>存储型xss作者设计的很有意思，采用直接向当前页面追加内容的方式实现的，也就是说，如果你测试很多次的话，这个页面会越来越大。<br>所以在name<code>输入框提交&lt;script&gt;alert(/reflect_xss/)&lt;/script&gt;</code>，再次刷新页面即可触发注入代码。</p>
 <p><img src="/2020/03/17/XSS%E8%B7%A8%E7%AB%99/image-20200317170930548.png" alt="image-20200317170930548"></p>
-<h1 id="XSS-DOM型"><a href="#XSS-DOM型" class="headerlink" title="XSS DOM型"></a><strong>XSS DOM型</strong></h1><p>可以发送，xss代码执行后没有在源码显示出来，这可能就是DOM型xss的特点</p>
+<h1 id="0x02-XSS-DOM型"><a href="#0x02-XSS-DOM型" class="headerlink" title="0x02 XSS DOM型"></a><strong>0x02 XSS DOM型</strong></h1><p>可以发送，xss代码执行后没有在源码显示出来，这可能就是DOM型xss的特点</p>
 <p><img src="/2020/03/17/XSS%E8%B7%A8%E7%AB%99/image-20200317171142022.png" alt="image-20200317171142022"></p>
 <p>这里引用别人对dom的解释<br><img src="/2020/03/17/XSS%E8%B7%A8%E7%AB%99/image-20200317171606831.png" alt="image-20200317171606831"></p>
 
