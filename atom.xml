@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-16T04:26:54.306Z</updated>
+  <updated>2020-03-17T08:29:33.072Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL注入</title>
+    <link href="http://yoursite.com/2020/03/17/SQL%E6%B3%A8%E5%85%A5/"/>
+    <id>http://yoursite.com/2020/03/17/SQL%E6%B3%A8%E5%85%A5/</id>
+    <published>2020-03-17T06:07:06.000Z</published>
+    <updated>2020-03-17T08:29:33.072Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;以DoraBox漏洞练习平台来进行本文的实验&lt;/p&gt;
+&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/gh0stkey/DoraBox&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Web安全" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="学习" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>X-Forwarded-For注入</title>
