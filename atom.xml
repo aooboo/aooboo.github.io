@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-17T09:22:29.741Z</updated>
+  <updated>2020-03-17T12:05:48.441Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSRF</title>
+    <link href="http://yoursite.com/2020/03/17/CSRF/"/>
+    <id>http://yoursite.com/2020/03/17/CSRF/</id>
+    <published>2020-03-17T10:07:15.000Z</published>
+    <updated>2020-03-17T12:05:48.441Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0x00-JSONP劫持&quot;&gt;&lt;a href=&quot;#0x00-JSONP劫持&quot; class=&quot;headerlink&quot; title=&quot;0x00 JSONP劫持&quot;&gt;&lt;/a&gt;&lt;strong&gt;0x00 JSONP劫持&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;JSONP 全称是
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Web安全" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="学习" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>XSS跨站</title>

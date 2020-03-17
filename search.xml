@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CSRF</title>
+    <url>/2020/03/17/CSRF/</url>
+    <content><![CDATA[<h1 id="0x00-JSONP劫持"><a href="#0x00-JSONP劫持" class="headerlink" title="0x00 JSONP劫持"></a><strong>0x00 JSONP劫持</strong></h1><p>JSONP 全称是 JSON with Padding ，是基于 JSON 格式的为解决跨域请求资源而产生的解决方案。他实现的基本原理是利用了 HTML 里 <code>&lt;script&gt;&lt;/script&gt;</code>元素标签，远程调用 JSON 文件来实现数据传递。<br>当某网站听过 JSONP 的方式来跨域（一般为子域）传递用户认证后的敏感信息时，攻击者可以构造恶意的 JSONP 调用页面，诱导被攻击者访问来达到截取用户敏感信息的目的。<br>直接访问链接，页面返回json格式的数据。</p>
+<p>目标可以看到页面包含了用户信息<br><img src="/2020/03/17/CSRF/image-20200317182038345.png" alt="image-20200317182038345"></p>
+<p>那么劫持后应该是可以在其他域下获得受害者的json信息，下面构造一个劫持页面，将劫持的信息，alert出来</p>
+<p>这是我们用到的代码 </p>
+<!--jsonp.html-->
+
+<script>function vulkey(data){alert(JSON.stringify(data));}</script>
+<script src="http://http://106.13.42.155:91/DoraBox/csrf/jsonp.php?callback=vulkey"></script>
+
+<p>效果<br><img src="/2020/03/17/CSRF/image-20200317190406561.png" alt="image-20200317190406561"></p>
+<h1 id="0x01-CORS跨域资源读取"><a href="#0x01-CORS跨域资源读取" class="headerlink" title="0x01 CORS跨域资源读取"></a><strong>0x01 CORS跨域资源读取</strong></h1><p>跨源资源共享 (CORS) 定义了在一个域中加载的客户端 Web 应用程序与另一个域中的资源交互的方式,需要浏览器和服务器共同支持才能实现。<br>可以看到其源码就是Access-Control-Allow-*系列，这个就是CORS的配置<br><img src="/2020/03/17/CSRF/image-20200317192022257.png" alt="image-20200317192022257"></p>
+<p>接下来构造页面获取信息<br><img src="/2020/03/17/CSRF/image-20200317200358860.png" alt="image-20200317200358860"></p>
+<p>效果<br><img src="/2020/03/17/CSRF/image-20200317200411005.png" alt="image-20200317200411005"></p>
+]]></content>
+      <categories>
+        <category>Web安全</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>XSS跨站</title>
     <url>/2020/03/17/XSS%E8%B7%A8%E7%AB%99/</url>
     <content><![CDATA[<p>以DoraBox漏洞练习平台来进行本文的实验</p>
