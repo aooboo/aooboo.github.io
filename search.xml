@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>文件包含</title>
+    <url>/2020/03/18/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</url>
+    <content><![CDATA[<p>项目地址：<a href="https://github.com/gh0stkey/DoraBox" target="_blank" rel="noopener">https://github.com/gh0stkey/DoraBox</a></p>
+<h1 id="0x00-任意文件包含"><a href="#0x00-任意文件包含" class="headerlink" title="0x00 任意文件包含"></a><strong>0x00 任意文件包含</strong></h1><p>看源码知道有个txt.txt文件</p>
+<p><a href="http://106.13.42.155:91/DoraBox-master/file_include/any_include.php?file=txt.txt&amp;submit=submit" target="_blank" rel="noopener">http://106.13.42.155:91/DoraBox-master/file_include/any_include.php?file=txt.txt&amp;submit=submit</a></p>
+<p><img src="/2020/03/18/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20200318100531321.png" alt="image-20200318100531321"></p>
+<h1 id="0x01-目录限制文件包含"><a href="#0x01-目录限制文件包含" class="headerlink" title="0x01 目录限制文件包含"></a><strong>0x01 目录限制文件包含</strong></h1><p>看下源码 加了个./</p>
+<p><img src="/2020/03/18/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20200318104742941.png" alt="image-20200318104742941"></p>
+<p>我们在看下网站目录<br><img src="/2020/03/18/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20200318104837254.png" alt="image-20200318104837254"></p>
+<p>随便输入一个1  可以看到执行的./1<br><img src="/2020/03/18/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20200318105617002.png" alt="image-20200318105617002"><br>那么在当前目录下直接txt.txt 就构成了./txt.txt<br><img src="/2020/03/18/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/image-20200318141934213.png" alt="image-20200318141934213"></p>
+]]></content>
+      <categories>
+        <category>Web安全</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSRF</title>
     <url>/2020/03/17/CSRF/</url>
     <content><![CDATA[<h1 id="0x00-JSONP劫持"><a href="#0x00-JSONP劫持" class="headerlink" title="0x00 JSONP劫持"></a><strong>0x00 JSONP劫持</strong></h1><p>JSONP 全称是 JSON with Padding ，是基于 JSON 格式的为解决跨域请求资源而产生的解决方案。他实现的基本原理是利用了 HTML 里 <code>&lt;script&gt;&lt;/script&gt;</code>元素标签，远程调用 JSON 文件来实现数据传递。<br>当某网站听过 JSONP 的方式来跨域（一般为子域）传递用户认证后的敏感信息时，攻击者可以构造恶意的 JSONP 调用页面，诱导被攻击者访问来达到截取用户敏感信息的目的。<br>直接访问链接，页面返回json格式的数据。</p>
