@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1</title>
-    <url>/2020/04/15/1/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>通达OA任意文件上传/文件包含RCE漏洞</title>
     <url>/2020/04/14/%E9%80%9A%E8%BE%BEOA%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABRCE%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h1 id="0x00-漏洞背景"><a href="#0x00-漏洞背景" class="headerlink" title="0x00 漏洞背景"></a><strong>0x00 漏洞背景</strong></h1><p>通达OA（Office Anywhere网络智能办公系统）是由北京通达信科科技有限公司自主研发的协同办公自动化系统，包括流程审批、行政办公、日常事务、数据统计分析、即时通讯、移动办公等。</p>
