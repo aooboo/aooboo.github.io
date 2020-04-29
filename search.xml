@@ -3,8 +3,7 @@
   <entry>
     <title>CuteEditor编辑器任意文件上传漏洞</title>
     <url>/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="0x00-背景描述"><a href="#0x00-背景描述" class="headerlink" title="0x00 背景描述"></a><strong>0x00 背景描述</strong></h1><p>某gov大型项目中的一处CuteEditor编辑器任意文件上传漏洞</p>
-<p>漏洞编号 wooyun-2015-0118429</p>
+    <content><![CDATA[<h1 id="0x00-背景描述"><a href="#0x00-背景描述" class="headerlink" title="0x00 背景描述"></a><strong>0x00 背景描述</strong></h1><p>接到客户大型gov项目中的一处CuteEditor编辑器任意文件上传漏洞<br>目标.net环境与360杀软<br>漏洞编号 wooyun-2015-0118429</p>
 <h1 id="0x01-渗透测试"><a href="#0x01-渗透测试" class="headerlink" title="0x01 渗透测试"></a><strong>0x01 渗透测试</strong></h1><p>使用自带的注册功能随意注册一个账户 进入后台</p>
 <p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429192929875.png" alt="image-20200429192929875"></p>
 <p>使用编辑器发布功能插入图片，这里有个比较搞笑的事情，我的生产力工具是mac，应该是这个网站比较老，上传点调不出我的本地文件管理器。开始一度放弃…后来转了一圈不甘心，又使用win7虚拟机可以。</p>
