@@ -1,6 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CuteEditor编辑器任意文件上传漏洞</title>
+    <url>/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="0x00-背景描述"><a href="#0x00-背景描述" class="headerlink" title="0x00 背景描述"></a><strong>0x00 背景描述</strong></h1><p>某gov大型项目中的一处CuteEditor编辑器任意文件上传漏洞</p>
+<p>漏洞编号 wooyun-2015-0118429</p>
+<h1 id="0x01-渗透测试"><a href="#0x01-渗透测试" class="headerlink" title="0x01 渗透测试"></a><strong>0x01 渗透测试</strong></h1><p>使用自带的注册功能随意注册一个账户 进入后台</p>
+<p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429192929875.png" alt="image-20200429192929875"></p>
+<p>使用编辑器发布功能插入图片，这里有个比较搞笑的事情，我的生产力工具是mac，应该是这个网站比较老，上传点调不出我的本地文件管理器。开始一度放弃…后来转了一圈不甘心，又使用win7虚拟机可以。</p>
+<p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429193441541.png" alt="image-20200429193441541"></p>
+<p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429193527427.png" alt="image-20200429193527427"></p>
+<p>在本地上传图片马 因为是.net的环境，使用png和aspx木马合成，目标机有360，需要木马做免杀。</p>
+<p>这里有一个坑就是服务器无法成功解析图片马，因为合成的图片马是把payload追加到图片代码后面，我们是绕过过落地时时aspx格式的木马，而服务器从头开始解析文件遇到图片前面的一些尖角符号会导致解析失败，这里的解决办法是需要我们使用win自带的画图功能做一个空白图片，这样图片的乱码干扰就好很多。免杀的payload我就马赛克了😂</p>
+<p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429194541219.png" alt="image-20200429194541219"></p>
+<p>这是失败的，看到有大量的图片乱码会干扰解析</p>
+<p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429194653571.png" alt="image-20200429194653571"></p>
+<p>我们先以png格式上传到编辑器，使用重命名功能把文件变成xx.aspx.png的格式</p>
+<p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429195116494.png" alt="image-20200429195116494"></p>
+<p>这里抓包 我的bp包丢了找不到了，写文章总结的时候已经提交漏洞给客户了，再打一次不太好…找了别的图代替下 一样的</p>
+<p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429195349502.png" alt="image-20200429195349502"></p>
+<p>False变成True，xx.aspx.png改成xx.aspx<br>Forward放过去，成功落地<br>工具连过去，system权限拿到</p>
+<p><img src="/2020/04/29/CuteEditor%E7%BC%96%E8%BE%91%E5%99%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20200429195909143.png" alt="image-20200429195909143"></p>
+]]></content>
+      <categories>
+        <category>渗透实战</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>域环境搭建</title>
+    <url>/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="0x00-域环境搭建"><a href="#0x00-域环境搭建" class="headerlink" title="0x00 域环境搭建"></a><strong>0x00 域环境搭建</strong></h1><h2 id="1-背景描述"><a href="#1-背景描述" class="headerlink" title="1.背景描述"></a>1.背景描述</h2><p>一共三台主机，win2008r2是域控，win2012r2是server安装exchange2013，win7是成员。</p>
+<p>参考资料：</p>
+<p>1: <a href>https://www.cnblogs.com/wuxinmengyi/p/11598181.html</a></p>
+<p>2: <a href="https://www.cnblogs.com/jianyus/archive/2013/07/04/3170732.html" target="_blank" rel="noopener">https://www.cnblogs.com/jianyus/archive/2013/07/04/3170732.html</a></p>
+<h2 id="2-win2008r2"><a href="#2-win2008r2" class="headerlink" title="2.win2008r2"></a>2.win2008r2</h2><p>详细安装过程参考<a href>https://www.cnblogs.com/wuxinmengyi/p/11598181.html</a></p>
+<p><img src="/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/image-20200420112404809.png" alt="image-20200420112404809"></p>
+<p><img src="/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/image-20200420133529239.png" alt="image-20200420133529239"></p>
+<p><img src="/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/image-20200420112508844.png" alt="image-20200420112508844"></p>
+<h2 id="3-win7"><a href="#3-win7" class="headerlink" title="3.win7"></a>3.win7</h2><p><img src="/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/image-20200420142608803.png" alt="image-20200420142608803"></p>
+<p><img src="/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/image-20200420142634607.png" alt="image-20200420142634607"></p>
+<h2 id="3-Win2012"><a href="#3-Win2012" class="headerlink" title="3.Win2012"></a>3.Win2012</h2><p>exchange2013有一些必备软件是微软网站的 网络不好下不动 后期会补上</p>
+<p><img src="/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/image-20200420223943601.png" alt="image-20200420223943601"></p>
+<h1 id="0x01-手动加密-LM-Hash、NTLM-Hash"><a href="#0x01-手动加密-LM-Hash、NTLM-Hash" class="headerlink" title="0x01 手动加密 LM_Hash、NTLM_Hash"></a><strong>0x01 手动加密 LM_Hash、NTLM_Hash</strong></h1><h2 id="1-NTML-Hash加密过程"><a href="#1-NTML-Hash加密过程" class="headerlink" title="1. NTML_Hash加密过程"></a>1. NTML_Hash加密过程</h2><p>yanghuan-79616e676875616e（16进制编码）</p>
+<p>79616e676875616e-790061006e0067006800750061006e00（ascii转unicode）</p>
+<p>790061006e0067006800750061006e00-69697f06ed212bc214360f15bd7d8468（md4加密得到hash）</p>
+<h2 id="2-LM-Hash"><a href="#2-LM-Hash" class="headerlink" title="2. LM_Hash"></a>2. LM_Hash</h2><p>yanghuan-YANGHUAN（将密码字母转换成大写）</p>
+<p>YANGHUAN-59414e474855414e（16进制转换）</p>
+<p>59414e474855414e-59414e474855414e000000000000（补0到28位）</p>
+<p>59414e47485541    4e000000000000（分为两组,各转换为2进制）</p>
+<p>01011001010000010100111001000111010010000101010101000000(长度不足56bit，左侧补0，再分为7bit一组，后加0)</p>
+<p>01001110000000000000000000000000000000000000000000000000(长度不足56bit，左侧补0，再分为7bit一组，后加0)</p>
+<p>前段</p>
+<p>01011000</p>
+<p>10100000</p>
+<p>01010010</p>
+<p>11001000</p>
+<p>01110100</p>
+<p>01000010</p>
+<p>01010100</p>
+<p>10000000</p>
+<p>后段</p>
+<p>01001110</p>
+<p>00000000</p>
+<p>00000000</p>
+<p>00000000</p>
+<p>00000000</p>
+<p>00000000</p>
+<p>00000000</p>
+<p>00000000</p>
+<p>0101100010100000010100101100100001110100010000100101010010000000-58a052c874425400（转换为16进制）</p>
+<p>0100111000000000000000000000000000000000000000000000000000000000-4e00000000000000（转换为16进制）</p>
+<p>用上面的两个对4b47532140232425（魔术字符串<em>“KGS!@#$%”</em>）进行des加密</p>
+<p>得到的拼接在一起就是Lm_Hash</p>
+<h1 id="0x02-自行触发UAC"><a href="#0x02-自行触发UAC" class="headerlink" title="0x02 自行触发UAC"></a><strong>0x02 自行触发UAC</strong></h1><p>win7上对c:\program files x86目录写入文件会触发uac</p>
+<p><img src="/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/image-20200420224843029.png" alt="image-20200420224843029"></p>
+<p><img src="/2020/04/20/%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/image-20200420224908433.png" alt="image-20200420224908433"></p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>通达OA任意文件上传/文件包含RCE漏洞</title>
     <url>/2020/04/14/%E9%80%9A%E8%BE%BEOA%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABRCE%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h1 id="0x00-漏洞背景"><a href="#0x00-漏洞背景" class="headerlink" title="0x00 漏洞背景"></a><strong>0x00 漏洞背景</strong></h1><p>通达OA（Office Anywhere网络智能办公系统）是由北京通达信科科技有限公司自主研发的协同办公自动化系统，包括流程审批、行政办公、日常事务、数据统计分析、即时通讯、移动办公等。</p>
